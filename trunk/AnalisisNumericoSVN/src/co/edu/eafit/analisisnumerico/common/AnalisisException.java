@@ -5,11 +5,11 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ * Controla las excepciones de la aplicacion
  * @author Sebastian
  *
  */
-public class AnalisisException extends Exception{
+public class AnalisisException extends Throwable{
 
 	/**
 	 * 
