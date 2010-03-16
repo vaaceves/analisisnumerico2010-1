@@ -1,4 +1,4 @@
-package co.edu.eafit.analisisnumerico.common;
+package co.edu.eafit.analisisnumerico.framework;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 

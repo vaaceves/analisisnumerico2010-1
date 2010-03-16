@@ -1,6 +1,7 @@
-package co.edu.eafit.analisisnumerico.common;
+package co.edu.eafit.analisisnumerico.framework;
 
 import java.util.Vector;
+
 
 /**
  * Funcion que debe ser padre de todos los metodos a implementar
@@ -8,7 +9,7 @@ import java.util.Vector;
  * @author Sebastian Velez
  * 
  */
-public abstract class MetodoPadre {
+public abstract class MetodoPadre implements MetodoInterfaz{
 
 
 	private Vector<Vector<Double>> datos;

@@ -1,10 +1,6 @@
 package co.edu.eafit.analisisnumerico.metodos;
 
-import co.edu.eafit.analisisnumerico.common.AnalisisException;
-import co.edu.eafit.analisisnumerico.common.MetodoInterfaz;
-import co.edu.eafit.analisisnumerico.common.MetodoPadre;
-import co.edu.eafit.analisisnumerico.common.UtilConsola;
-
+import co.edu.eafit.analisisnumerico.framework.*;
 
 /**
  * Metodo de la biseccion. Utiliza el punto medio para acercarse a la raiz
@@ -14,50 +10,25 @@ import co.edu.eafit.analisisnumerico.common.UtilConsola;
  */
 public class Biseccion extends MetodoPadre implements MetodoInterfaz {
 
-	/*
-	 * este metodo no debe aparecer una vez tengamos la interfaz grafica
-	 * solo debe crear el objeto, ejecutar el metodo ejecutar, e imprimir los resultados
-	 * no debe poseer logica del negocio
-	 * una vez creemos la interfaz, lo vamos a eliminar
+	/**
+	 * Funcion Main. Ejecuta Biseccion
+	 * 
 	 */
-	
 	public static void main(String[] args){
-		Biseccion b = new Biseccion();
-		String resul = b.ejecutar();
-		System.out.println(resul);
-		Object[][] matriz = b.generarMatriz();
-		UtilConsola.imprimir(matriz);
+		double[] valoresIniciales = {3.5,4.0,5.0,20};
+		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, valoresIniciales, "Xi", "Xs", "Cifras significativas", "iteraciones");
+//		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
-
-
-	/*
-	 * este metodo no debe aparecer una vez tengamos la interfaz grafica
-	 * solo debe leer los datos por consola y ejecutar la funcion. NADA MAS.
-	 * no debe poseer logica del negocio
-	 * una vez creemos la interfaz, lo vamos a eliminar
-	 */
-	private String ejecutar() {
-		try{
-			double xi = UtilConsola.leerDouble("Ingrese Xi: ");
-			double xs = UtilConsola.leerDouble("Ingrese Xs: ");
-			double cifrasSignificativas = UtilConsola.leerDouble("Ingrese el numero de cifras significativas: ");
-			double tolerancia = UtilConsola.getTolerancia(cifrasSignificativas);
-			double iteraciones = UtilConsola.leerDouble("Ingrese las iteraciones: ");
-			String resultado = metodo(xi,xs, tolerancia,iteraciones);
-			return resultado;
-		}
-		catch(AnalisisException e){ return e.getMessage();	}
-		
-	}
-
 
 	@Override
 	public String metodo(double... entradas) {
 		this.adicionarFilaTitulos("iteracion","xi","xs","xm","f(xm)","error");
 		double xi = entradas[0];
 		double xs = entradas[1];
-		double tolerancia = entradas[2];
+		double cifrasSignificativas = entradas[2];
 		double iteraciones = entradas[3];
+		//CONVIERTO LAS CIFRAS A TOLERANCIA (5->0,000001)
+		double tolerancia = UtilConsola.getTolerancia(cifrasSignificativas);
 		double yi =f(xi);
 		double ys =f(xs);
 		if(yi==0)return "Xi es raiz";

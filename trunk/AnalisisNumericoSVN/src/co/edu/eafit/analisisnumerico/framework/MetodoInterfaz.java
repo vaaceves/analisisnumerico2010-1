@@ -1,4 +1,4 @@
-package co.edu.eafit.analisisnumerico.common;
+package co.edu.eafit.analisisnumerico.framework;
 
 /**
  * Interfaz que obliga a implementar el metodo con una serie de entradas 
