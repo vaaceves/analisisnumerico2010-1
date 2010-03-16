@@ -17,7 +17,6 @@ public class Biseccion extends MetodoPadre implements MetodoInterfaz {
 	public static void main(String[] args){
 		double[] valoresIniciales = {3.5,4.0,5.0,20};
 		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, valoresIniciales, "Xi", "Xs", "Cifras significativas", "iteraciones");
-//		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
 
 	@Override
