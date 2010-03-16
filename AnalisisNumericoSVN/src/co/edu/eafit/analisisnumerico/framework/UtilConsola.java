@@ -1,8 +1,9 @@
-package co.edu.eafit.analisisnumerico.common;
+package co.edu.eafit.analisisnumerico.framework;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 
 /**
  * Utilidades de lectura y escritura por consola 
@@ -18,7 +19,7 @@ public class UtilConsola {
 	public static void imprimir(Object[][] matriz) {
 		for(int i=0;i<matriz.length;i++){
 			for(int j=0;j<matriz[0].length;j++){
-				System.out.print(matriz[i][j]+"\t");
+				System.out.print(matriz[i][j]+"\t\t");
 			}
 			System.out.println();
 		}		
