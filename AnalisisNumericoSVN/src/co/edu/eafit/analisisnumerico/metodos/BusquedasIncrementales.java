@@ -12,6 +12,10 @@ public class BusquedasIncrementales extends MetodoPadre implements MetodoInterfa
 	@Override
 	public String metodo(double... entradas) {
 		return null;
+		dasd
+		sad
+		sa
+		dsad
 	}
 
 }
