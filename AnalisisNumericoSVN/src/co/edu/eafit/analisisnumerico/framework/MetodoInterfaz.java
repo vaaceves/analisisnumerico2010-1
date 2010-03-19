@@ -23,4 +23,7 @@ public interface MetodoInterfaz {
 	public double f(double... valores);
 	
 	
+		
+	
+	
 }
