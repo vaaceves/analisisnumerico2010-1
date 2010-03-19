@@ -79,6 +79,7 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 		return Math.pow(Math.E, (Math.pow(x, 2)*-1)+1)-x*Math.sin(2*x+3)-3;
 	}
 	
+	
 	/**
 	 * Evalua con la funcion predeterminada, declarada en f(String, double[])
 	 * No recibe otra funcion
@@ -86,6 +87,16 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 * @return el valor evaluado en esa funcion
 	 */
 	public double f(double... valorVariables){
+		return f("", valorVariables);
+	}
+	
+	/**
+	 * Evalua con la funcion G predeterminada, declarada en f(String, double[])
+	 * No recibe otra funcion
+	 * @param valorVariables -> las n variables a evaluar
+	 * @return el valor evaluado en esa funcion
+	 */	
+	public double g(double... valorVariables){
 		return f("", valorVariables);
 	}
 	
