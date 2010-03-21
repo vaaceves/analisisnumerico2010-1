@@ -76,7 +76,22 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 */
 	public double f(String declaracionFuncion, double... valorVariables){
 		double x= valorVariables[0]; 
-		return Math.pow(Math.E, (Math.pow(x, 2)*-1)+1)-x*Math.sin(2*x+3)-3;
+		//return Math.pow(Math.E, (Math.pow(x, 2)*-1)+1)-x*Math.sin(2*x+3)-3;
+		//return Math.log(Math.pow(x, 2)+3)-6*Math.pow(x, 2)+x*Math.cos(x)-3; // Ln((x^2)+3)-6x^2+xcos(x)-3 FUNCION 2
+		return Math.sin(x)-Math.exp(-x); //sen(x)-e^(-x)FUNCION 3
+	}
+	
+	public double fdev(String declaracionFuncion, double... valorVariables){ //Derivada de la funcion
+		double x= valorVariables[0]; 
+		//return ((2*x)*-1)*Math.pow(Math.E, (Math.pow(x, 2)*-1)+1)-Math.sin(2*x+3)+(2*x)*Math.cos(2*x+3); // -2x*e^(-(x^2)+1)-sen(2x+3)+2xcos(2x+3) FUNCION 1
+		//return ((2*x)/(Math.pow(x, 2)+3))-12*x+Math.cos(x)-x*Math.sin(x); // (2x/(x^2)+3) - 12x + cos(x) - xsen(x) FUNCION 2
+		return Math.cos(x)+Math.exp(-x); //cos(x)+e^(-x) FUNCION 3
+	}
+	
+	public double fdd(String declaracionFuncion, double... valorVariables){ //Segunda derivada de la funcion
+		double x= valorVariables[0]; 
+		//return (-2)*Math.pow(Math.E, (Math.pow(x, 2)*-1)+1)+(4*x)*Math.pow(Math.E, (Math.pow(x, 2)*-1)+1)-2*Math.sin(2*x+3)+(2)*Math.cos(2*x+3)+2*x+2*Math.sin(2*x+3); // -2*e^(-(x^2)+1)+4x*e^(-(x^2)+1)-2cos(2x+3)+(2*cos(2x+3)+2x+2(-sen(2x+3))) FUNCION 1
+		return -Math.sin(x)-Math.exp(-x); // -sen(x)-e^(-x) FUNCION 3
 	}
 	
 	
@@ -88,6 +103,14 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 */
 	public double f(double... valorVariables){
 		return f("", valorVariables);
+	}
+	
+	public double fdev(double... valorVariables){ //Derivada de la funcion
+		return fdev("", valorVariables);
+	}
+	
+	public double fdd(double... valorVariables){ //Segunda derivada de la funcion
+		return fdd("", valorVariables);
 	}
 	
 	/**
