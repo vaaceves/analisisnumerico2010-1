@@ -2,6 +2,8 @@ package co.edu.eafit.analisisnumerico.framework;
 
 import co.edu.eafit.analisisnumerico.metodos.Biseccion;
 import co.edu.eafit.analisisnumerico.metodos.BusquedasIncrementales;
+import co.edu.eafit.analisisnumerico.metodos.Newton;
+import co.edu.eafit.analisisnumerico.metodos.RaicesMultiples;
 import co.edu.eafit.analisisnumerico.metodos.ReglaFalsa;
 
 /**
@@ -49,6 +51,8 @@ public class GestorMetodos {
 		if(metodo==Constantes.BISECCION) return new Biseccion();
 		if(metodo==Constantes.BUSQUEDASINCREMENTALES) return new BusquedasIncrementales();
 		if(metodo==Constantes.REGLAFALSA) return new ReglaFalsa();
+		if(metodo==Constantes.NEWTON) return new Newton();
+		if(metodo==Constantes.RAICESMULTIPLES) return new RaicesMultiples();
 		return null;
 	}
 
