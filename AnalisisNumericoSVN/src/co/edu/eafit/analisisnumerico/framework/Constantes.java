@@ -15,6 +15,7 @@ public final class Constantes {
 	public static final int PUNTOFIJO=4;
 	public static final int NEWTON=5;
 	public static final int SECANTE=6;
+	public static final int RAICESMULTIPLES=7;
 	
 	//CONSTANTES DE MODO DE OPERACION
 	public static final int MODOCONSOLA=1;
