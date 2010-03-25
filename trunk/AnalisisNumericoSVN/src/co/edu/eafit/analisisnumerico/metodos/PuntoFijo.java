@@ -25,7 +25,7 @@ public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 	
 	@Override
 	public String metodo(double... entradas)  throws AnalisisException{
-		this.adicionarFilaTitulos("iteracion","xi","xm","f(xm)","error");
+		this.adicionarFilaTitulos("iteracion","xi","f(xi)","error");
 		double x0 = entradas[0];
 		double cifrasSignificativas = entradas[1];
 		double iteraciones = entradas[2];
@@ -33,14 +33,16 @@ public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 		
 		double y =f(x0);
 		double error= tolerancia+1;
-		int cont =0;
+		double cont =0;
 		double x1=0;
+		adicionarFilaResultados(cont,x0,y,error);
 		while(y!=0&&error>tolerancia&&cont<iteraciones){
 			x1=g(x0);
 			y=f(x1);
 			error=Math.abs(x1-x0)/x1;
-			cont++;
 			x0=x1;
+			adicionarFilaResultados(cont,x0,y,error);
+			cont++;
 		}
 		if(y==0)return x1+"es raiz. Hallado en "+cont+" iteraciones.";
 		else if(error<=tolerancia)return x1+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";

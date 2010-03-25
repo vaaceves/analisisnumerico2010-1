@@ -38,7 +38,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 			double error= tolerancia+1;
 			double cont =1;
 			double ym=f(xm);
-			this.adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
+			adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
 			while(ym!=0&&error>tolerancia&&cont<iteraciones){
 				if(yi*ym<0){
 					xs=xm;
@@ -53,7 +53,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 				ym=f(xm);
 				error = Math.abs(xm-xAux)/xm;
 				cont++;
-				this.adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
+				adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
 			}
 			if(ym==0)return xm+"es raiz. Hallado en "+cont+" iteraciones.";
 			else if(error<=tolerancia)return xm+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";
