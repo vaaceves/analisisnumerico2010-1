@@ -1,5 +1,6 @@
 package co.edu.eafit.analisisnumerico.metodos;
 
+import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.GestorMetodos;
 import co.edu.eafit.analisisnumerico.framework.MetodoInterfaz;
@@ -12,12 +13,13 @@ public class Secante extends MetodoPadre implements MetodoInterfaz{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//double[] valoresIniciales = {3.5,4.0,5.0,20};
-		GestorMetodos.ejecutar(Constantes.SECANTE, Constantes.MODOCONSOLA, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
+		double[] valoresIniciales = {4.9,4.8,5,40};
+		String[] fi ={"ln(x+4)+x*cos(1+x^2)-5"};
+		GestorMetodos.ejecutar(Constantes.SECANTE, Constantes.MODOCONSOLA, "Método de la secante", "f", fi, valoresIniciales, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
 	
 	@Override
-	public String metodo(double... entradas) {
+	public String metodo(double... entradas) throws AnalisisException{
 		this.adicionarFilaTitulos("iteracion","xi","xs","xm","f(xm)","error");
 		double xi=entradas[0];
 		double xs=entradas[1];
@@ -37,7 +39,7 @@ public class Secante extends MetodoPadre implements MetodoInterfaz{
 			while(y1!=0&&error>tolerancia&&denominador!=0&&cont<iteraciones){
 				xAux=(xs-(y1*(xs-xi)));
 				yAux=f(xAux);
-				error = Math.abs(xAux-xs)/xAux;
+				error = Math.abs((xAux-xs)/xAux);
 				xi=xs;
 				xs=xAux;
 				y0=y1;

@@ -15,12 +15,11 @@ public class Newton extends MetodoPadre implements MetodoInterfaz {
 	 * 
 	 */
 	public static void main(String[] args){
-		//double[] valoresIniciales = {3.5,4.0,5.0,20};
-		GestorMetodos.ejecutar(Constantes.NEWTON, Constantes.MODOCONSOLA, null, "Xn", "Cifras significativas", "iteraciones");
+		GestorMetodos.ejecutar(Constantes.NEWTON, Constantes.MODOGRAFICOINTERFAZ1, "Metodo de Newton", "f,fdev",null,null,  "Xn", "Cifras significativas", "iteraciones");
 	}
 
 	@Override
-	public String metodo(double... entradas) {
+	public String metodo(double... entradas) throws AnalisisException{
 		this.adicionarFilaTitulos("iteracion","xn","f(xn)","f'(xn)","error");
 		double x0 = entradas[0];
 		double cifrasSignificativas = entradas[1];
@@ -28,7 +27,7 @@ public class Newton extends MetodoPadre implements MetodoInterfaz {
 		//CONVIERTO LAS CIFRAS A TOLERANCIA (5->0,000001)
 		double tolerancia = UtilConsola.getTolerancia(cifrasSignificativas);
 		double y0 =f(x0);
-		double dy0 = fdev(x0);
+		double dy0 = fd(x0);
 		double error= tolerancia+1;
 		double cont =0;
 		double x1;
@@ -36,7 +35,7 @@ public class Newton extends MetodoPadre implements MetodoInterfaz {
 		while(y0!=0&&error>tolerancia&&cont<iteraciones){
 			x1 = x0-(y0/dy0);
 			y0 = f(x1);
-			dy0 = fdev(x1);
+			dy0 = fd(x1);
 			error = Math.abs(x1-x0);
 			x0=x1;
 			adicionarFilaResultados(cont,x0,y0,dy0,error);
