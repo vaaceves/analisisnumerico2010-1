@@ -32,14 +32,20 @@ public class UtilConsola {
 	 */
 	public static double leerDouble(String mensaje) throws AnalisisException{
 		String txt="";
-		System.out.println(mensaje);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		try {
-			txt=br.readLine();
-		} catch (IOException e) {
-			throw new AnalisisException(e.getMessage());
+		double resul = -1;
+		boolean deboSalir=false;
+		while(!deboSalir){
+			deboSalir=true;
+			System.out.println(mensaje);
+			try {
+				txt=br.readLine();
+				resul = Double.parseDouble(txt);
+			} catch (Exception e) {
+				new AnalisisException(e.getMessage());
+				deboSalir=false;
+			}
 		}
-		double resul = Double.parseDouble(txt);
 		return resul;
 	}
 
