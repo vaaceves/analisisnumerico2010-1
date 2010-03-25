@@ -38,7 +38,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 			double error= tolerancia+1;
 			double cont =1;
 			double ym=f(xm);
-			adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
+			adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,-1.0);
 			while(ym!=0&&error>tolerancia&&cont<iteraciones){
 				if(yi*ym<0){
 					xs=xm;
