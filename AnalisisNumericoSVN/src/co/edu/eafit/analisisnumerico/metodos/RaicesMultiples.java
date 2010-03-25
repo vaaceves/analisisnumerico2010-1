@@ -15,12 +15,13 @@ public class RaicesMultiples extends MetodoPadre implements MetodoInterfaz {
 	 * 
 	 */
 	public static void main(String[] args){
-		//double[] valoresIniciales = {3.5,4.0,5.0,20};
-		GestorMetodos.ejecutar(Constantes.RAICESMULTIPLES, Constantes.MODOCONSOLA, null, "Xn", "Cifras significativas", "iteraciones");
+		String[] fPred = {"3x^2-4", "6x", "0"};
+		double[] valoresIniciales = {1,5,20};
+		GestorMetodos.ejecutar(Constantes.RAICESMULTIPLES, Constantes.MODOGRAFICOINTERFAZ1, "Raices multiples", "f,fdev,fdd", fPred, valoresIniciales, "Xn", "Cifras significativas", "iteraciones");
 	}
 
 	@Override
-	public String metodo(double... entradas) {
+	public String metodo(double... entradas) throws AnalisisException {
 		this.adicionarFilaTitulos("iteracion","xn","f(xn)","f'(xn)","f''(x)","error");
 		double x0 = entradas[0];
 		double cifrasSignificativas = entradas[1];
@@ -28,7 +29,7 @@ public class RaicesMultiples extends MetodoPadre implements MetodoInterfaz {
 		//CONVIERTO LAS CIFRAS A TOLERANCIA (5->0,000001)
 		double tolerancia = UtilConsola.getTolerancia(cifrasSignificativas);
 		double y0 =f(x0);
-		double dy0 = fdev(x0);
+		double dy0 = fd(x0);
 		double ddy0 = fdd(x0);
 		double error= tolerancia+1;
 		double denominador = Math.pow(dy0, 2)-(y0*ddy0);
@@ -38,7 +39,7 @@ public class RaicesMultiples extends MetodoPadre implements MetodoInterfaz {
 		while(y0!=0&&error>tolerancia&&cont<iteraciones){
 			x1 = x0-((y0*dy0)/denominador);
 			y0 = f(x1);
-			dy0 = fdev(x1);
+			dy0 = fd(x1);
 			ddy0 = fdd(x1);
 			error = Math.abs(x1-x0);
 			denominador = Math.pow(dy0, 2)-(y0*ddy0);

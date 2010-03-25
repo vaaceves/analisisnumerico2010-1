@@ -15,12 +15,11 @@ public class Biseccion extends MetodoPadre implements MetodoInterfaz {
 	 * 
 	 */
 	public static void main(String[] args){
-		double[] valoresIniciales = {3.5,4.0,5.0,20};
-		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, valoresIniciales, "Xi", "Xs", "Cifras significativas", "iteraciones");
+		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, "Metodo de Biseccion", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
 
 	@Override
-	public String metodo(double... entradas) {
+	public String metodo(double... entradas) throws AnalisisException{
 		this.adicionarFilaTitulos("iteracion","xi","xs","xm","f(xm)","error");
 		double xi = entradas[0];
 		double xs = entradas[1];

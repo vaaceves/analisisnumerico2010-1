@@ -1,11 +1,17 @@
 package co.edu.eafit.analisisnumerico.metodos;
 
+import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.GestorMetodos;
 import co.edu.eafit.analisisnumerico.framework.MetodoInterfaz;
 import co.edu.eafit.analisisnumerico.framework.MetodoPadre;
 import co.edu.eafit.analisisnumerico.framework.UtilConsola;
 
+/**
+ * 
+ * @author Daniela
+ *
+ */
 public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 
 	/**
@@ -13,11 +19,12 @@ public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 	 */
 	public static void main(String[] args) {
 		//double[] valoresIniciales = {3.5,4.0,5.0,20};
-		GestorMetodos.ejecutar(Constantes.PUNTOFIJO,Constantes.MODOCONSOLA, null, "X0", "Cifras significativas", "iteraciones");
+		String[] fPredeterminadas = {"e^(-2x-5)-x^2+2x","sqrt(e^(-2x-5)+2x)"};
+		GestorMetodos.ejecutar(Constantes.PUNTOFIJO,Constantes.MODOCONSOLA, "Método de Punto Fijo","f,g", fPredeterminadas , null, "X0", "Cifras significativas", "iteraciones");
 	}
 	
 	@Override
-	public String metodo(double... entradas) {
+	public String metodo(double... entradas)  throws AnalisisException{
 		this.adicionarFilaTitulos("iteracion","xi","xm","f(xm)","error");
 		double x0 = entradas[0];
 		double cifrasSignificativas = entradas[1];
