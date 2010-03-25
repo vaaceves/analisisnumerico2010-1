@@ -19,5 +19,6 @@ public final class Constantes {
 	
 	//CONSTANTES DE MODO DE OPERACION
 	public static final int MODOCONSOLA=1;
-	public static final int MODOGRAFICO=2;
+	public static final int MODOGRAFICOINTERFAZ1=2;
+	public static final int MODOGRAFICOINTERFAZ2=3;
 }

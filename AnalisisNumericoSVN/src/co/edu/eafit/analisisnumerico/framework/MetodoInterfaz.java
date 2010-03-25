@@ -13,14 +13,14 @@ public interface MetodoInterfaz {
 	 * @param entradas -> todas las entradas que necesite. Recibe n parametros
 	 * @return el mensaje de exito o fracaso
 	 */
-	public String metodo(double... entradas);
+	public String metodo(double... entradas) throws AnalisisException;
 	
 	/**
 	 * Ejecuta la funcion en una serie de valores
 	 * @param valores: Valores a tomar la funcion
 	 * @return
 	 */
-	public double f(double... valores);
+	public double f(double... valores) throws AnalisisException;
 	
 	
 		
