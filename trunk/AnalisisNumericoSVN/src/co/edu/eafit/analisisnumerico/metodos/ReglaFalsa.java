@@ -49,7 +49,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 					yi=ym;
 				}
 				xAux=xm;
-				xm=(xi+xs)/2;
+				xm=xi-((yi*(xi-xs))/(yi-ys));
 				ym=f(xm);
 				error = Math.abs(xm-xAux)/xm;
 				cont++;
