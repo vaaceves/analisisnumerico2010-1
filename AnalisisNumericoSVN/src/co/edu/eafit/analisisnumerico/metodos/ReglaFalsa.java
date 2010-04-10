@@ -15,7 +15,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 	public static void main(String[] args) {
 		String[] fPre = {"3x^2-4"};
 		double[] valPre = {-1.0,4.0,5.0,20.0};
-		GestorMetodos.ejecutar(Constantes.REGLAFALSA, Constantes.MODOCONSOLA, "Método de regla falsa", "f", fPre, valPre, "Xi", "Xs", "Cifras significativas", "iteraciones");
+		GestorMetodos.ejecutar(Constantes.REGLAFALSA, Constantes.MODOGRAFICOINTERFAZ1, "Método de regla falsa", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
 
 	@Override

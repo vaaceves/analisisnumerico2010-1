@@ -18,9 +18,9 @@ public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//double[] valoresIniciales = {3.5,4.0,5.0,20};
+		double[] valoresIniciales = {3.5,4.0,5.0,20};
 		String[] fPredeterminadas = {"e^(-2x-5)-x^2+2x","sqrt(e^(-2x-5)+2x)"};
-		GestorMetodos.ejecutar(Constantes.PUNTOFIJO,Constantes.MODOCONSOLA, "Método de Punto Fijo","f,g", fPredeterminadas , null, "X0", "Cifras significativas", "iteraciones");
+		GestorMetodos.ejecutar(Constantes.PUNTOFIJO,Constantes.MODOGRAFICOINTERFAZ1, "Método de Punto Fijo","f,g", fPredeterminadas , valoresIniciales, "X0", "Cifras significativas", "iteraciones");
 	}
 	
 	@Override
