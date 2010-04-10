@@ -25,7 +25,7 @@ public class BusquedasIncrementales extends MetodoPadre implements MetodoInterfa
 		double delta = entradas[1];
 		double iteraciones = entradas[2];
 		double xs=xi+delta;
-		double cont=0;
+		double cont=0;	
 		double y0;
 		double y1 = f(xs) ;
 		do{

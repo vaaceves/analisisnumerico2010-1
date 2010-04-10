@@ -31,7 +31,7 @@ public class Secante extends MetodoPadre implements MetodoInterfaz{
 		double y1 =f(xs);
 		double denominador=y1-y0;
 		double error= tolerancia+1;
-		double cont =0;
+		double cont=0;
 		if(y0==0)return "Xi es raiz";
 		else {
 			double xAux;
