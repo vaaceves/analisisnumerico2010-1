@@ -35,7 +35,7 @@ public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 		double error= tolerancia+1;
 		double cont =0;
 		double x1=0;
-		adicionarFilaResultados(cont,x0,y,error);
+		adicionarFilaResultados(cont,x0,y,-1.0);
 		while(y!=0&&error>tolerancia&&cont<iteraciones){
 			x1=g(x0);
 			y=f(x1);
