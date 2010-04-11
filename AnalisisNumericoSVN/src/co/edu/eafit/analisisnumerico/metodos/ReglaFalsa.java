@@ -13,8 +13,8 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String[] fPre = {"3x^2-4"};
-		double[] valPre = {-1.0,4.0,5.0,20.0};
+		//String[] fPre = {"3x^2-4"};
+		//double[] valPre = {-1.0,4.0,5.0,20.0};
 		GestorMetodos.ejecutar(Constantes.REGLAFALSA, Constantes.MODOGRAFICOINTERFAZ1, "Método de regla falsa", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
 
@@ -38,8 +38,9 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 			double error= tolerancia+1;
 			double cont =1;
 			double ym=f(xm);
+			double denominador=(yi-ys);
 			adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,-1.0);
-			while(ym!=0&&error>tolerancia&&cont<iteraciones){
+			while(ym!=0&&error>tolerancia&&cont<iteraciones&&denominador!=0){
 				if(yi*ym<0){
 					xs=xm;
 					ys=ym;
@@ -55,8 +56,10 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 				cont++;
 				adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
 			}
+			
 			if(ym==0)return xm+"es raiz. Hallado en "+cont+" iteraciones.";
 			else if(error<=tolerancia)return xm+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";
+			else if(denominador==0)return "Division por cero.";
 			else return "Se ha fracasado con "+cont+" iteraciones";
 		}
 	}
