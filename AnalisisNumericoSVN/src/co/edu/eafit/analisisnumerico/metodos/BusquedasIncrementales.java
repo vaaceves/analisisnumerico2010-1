@@ -23,22 +23,28 @@ public class BusquedasIncrementales extends MetodoPadre implements MetodoInterfa
 		this.adicionarFilaTitulos("iteracion","xi","xs");
 		double xi=entradas[0];
 		double delta = entradas[1];
-		double iteraciones = entradas[2];
-		double xs=xi+delta;
-		double cont=0;	
-		double y0;
-		double y1 = f(xs) ;
-		do{
-			xi=xs;
-			xs=xs+delta;
-			cont++;
-			y0=y1;
-			y1=f(xs);
-			adicionarFilaResultados(cont, xi, xs);
-		}while(y0!=0&&y1!=0&&y0*y1>=0&&cont<iteraciones);
-		if(y1==0) return xs + "es raiz";
-		else if(y0==0) return xi + "es raiz";
-		else if(cont<iteraciones)return "Intervalo: entre "+ xi +" y "+ xs + "hallado en "+ cont +"numero de iteraciones";
-		else return "numero maximo de iteraciones";	
+		double iteraciones = entradas[2];	
+		double y0=f(xi);
+		
+		if(y0==0){
+			return xi + "es raiz";
+		}else{
+			double xs=xi+delta;
+			double y1=f(xs);
+			double cont=1;
+			
+			while(y0*y1>0&&cont<iteraciones){
+				xi=xs;
+				y0=y1;
+				xs=xi+delta;
+				y1=f(xs);
+				cont++;
+			}
+			if(y1==0) return xs + "es raiz";
+			else if(y0*y1<0) return "Intervalo: entre "+ xi +" y "+ xs + "hallado en "+ cont +"numero de iteraciones";
+			else return "numero maximo de iteraciones";			
+		}
+		
+			
 	}
 }
