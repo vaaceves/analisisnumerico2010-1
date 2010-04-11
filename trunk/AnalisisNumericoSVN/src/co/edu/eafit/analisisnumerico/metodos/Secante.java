@@ -26,17 +26,16 @@ public class Secante extends MetodoPadre implements MetodoInterfaz{
 		double cifrasSignificativas = entradas[2];
 		double iteraciones = entradas[3];
 		double tolerancia = UtilConsola.getTolerancia(cifrasSignificativas);
-		
+		double cont=0;
 		double y0 =f(xi);
 		double y1 =f(xs);
+		double error=tolerancia+1;;
 		double denominador=y1-y0;
-		double error= tolerancia+1;
-		double cont=0;
 		if(y0==0)return "Xi es raiz";
 		else {
 			double xAux;
 			double yAux;
-			adicionarFilaResultados(cont,xi,xs,y1,error);
+			adicionarFilaResultados(cont,xi,xs,y1,-1.0);
 			while(y1!=0&&error>tolerancia&&denominador!=0&&cont<iteraciones){
 				xAux=(xs-(y1*(xs-xi)))/denominador;
 				yAux=f(xAux);
