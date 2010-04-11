@@ -355,7 +355,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
     public javax.swing.JLabel lbl8;
     public javax.swing.JLabel lblFinal;
     public javax.swing.JLabel lblTitulo;
-    public javax.swing.JTextField txt1s;
+    public javax.swing.JTextField txt1;
     public javax.swing.JTextField txt2;
     public javax.swing.JTextField txt3;
     public javax.swing.JTextField txt4;
