@@ -54,6 +54,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 				ym=f(xm);
 				error = Math.abs(xm-xAux)/xm;
 				cont++;
+				denominador=(yi-ys);
 				adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
 			}
 			
