@@ -32,7 +32,7 @@ public class Newton extends MetodoPadre implements MetodoInterfaz {
 		double cont =0;
 		double x1;
 		adicionarFilaResultados(cont,x0,y0,dy0,-1.0);
-		while(y0!=0&&error>tolerancia&&cont<iteraciones){
+		while(y0!=0&&error>tolerancia&&dy0!=0&&cont<iteraciones){
 			x1 = x0-(y0/dy0);
 			y0 = f(x1);
 			dy0 = fd(x1);
@@ -42,10 +42,10 @@ public class Newton extends MetodoPadre implements MetodoInterfaz {
 			cont++;
 		}
 		if (y0 == 0){
-			return x0+" es raiz. Hallada en "+cont+" iteraciones";
+			return xFormat(x0)+" es raiz. Hallada en "+cont+" iteraciones";
 		}
 		else if (error < tolerancia){
-			return x0+" es una raiz aproximada. Hallada en "+cont;
+			return xFormat(x0)+" es una raiz aproximada con error: "+eFormat(error)+". Hallada en "+cont+" iteraciones";
 		}
 		else if (dy0 == 0){
 			return "Derivada se hizo cero";

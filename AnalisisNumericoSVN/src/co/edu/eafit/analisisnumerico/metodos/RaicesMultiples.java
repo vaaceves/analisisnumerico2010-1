@@ -48,10 +48,10 @@ public class RaicesMultiples extends MetodoPadre implements MetodoInterfaz {
 			cont++;
 		}
 		if (y0 == 0){
-			return x0+" es raiz. Hallada en "+cont+" iteraciones";
+			return xFormat(x0)+" es raiz. Hallada en "+cont+" iteraciones";
 		}
 		else if (error < tolerancia){
-			return x0+" es una raiz aproximada. Hallada en "+cont;
+			return xFormat(x0)+" es una raiz aproximada con error: "+eFormat(error)+". Hallada en "+cont;
 		}
 		else if (denominador == 0){
 			return "Denominador se hizo cero";

@@ -39,13 +39,13 @@ public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
 		while(y!=0&&error>tolerancia&&cont<iteraciones){
 			x1=g(x0);
 			y=f(x1);
-			error=Math.abs(x1-x0)/x1;
+			error=Math.abs(x1-x0);
 			x0=x1;
 			adicionarFilaResultados(cont,x0,y,error);
 			cont++;
 		}
-		if(y==0)return x1+"es raiz. Hallado en "+cont+" iteraciones.";
-		else if(error<=tolerancia)return x1+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";
+		if(y==0)return xFormat(x1)+"es raiz. Hallado en "+cont+" iteraciones.";
+		else if(error<=tolerancia)return xFormat(x1)+" es raiz con un error relativo de "+eFormat(error)+". Hallado en "+cont+" iteraciones.";
 		else return "Se ha fracasado con "+cont+" iteraciones";
 	}
 

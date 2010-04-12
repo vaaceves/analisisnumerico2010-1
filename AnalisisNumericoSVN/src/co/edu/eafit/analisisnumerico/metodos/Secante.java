@@ -35,22 +35,23 @@ public class Secante extends MetodoPadre implements MetodoInterfaz{
 		else {
 			double xAux;
 			double yAux;
+			cont++;
 			adicionarFilaResultados(cont,xi,xs,y1,-1.0);
 			while(y1!=0&&error>tolerancia&&denominador!=0&&cont<iteraciones){
-				xAux=(xs-(y1*(xs-xi)))/denominador;
+				xAux=xs-((y1*(xs-xi))/denominador);
 				yAux=f(xAux);
-				error = Math.abs((xAux-xs)/xAux);
+				error = Math.abs(xAux-xs)/Math.abs(xAux);
 				xi=xs;
 				xs=xAux;
 				y0=y1;
 				y1=yAux;
 				denominador=y1-y0;
-				adicionarFilaResultados(cont,xi,xs,yAux,error);
 				cont++;
+				adicionarFilaResultados(cont,xi,xs,yAux,error);
 			}
 		}
-		if(y1==0)return xs+"es raiz. Hallado en "+cont+" iteraciones.";
-		else if(error<=tolerancia)return xs+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";
+		if(y1==0)return xFormat(xs)+"es raiz. Hallado en "+cont+" iteraciones.";
+		else if(error<=tolerancia)return xFormat(xs)+" es raiz con un error relativo de "+eFormat(error)+". Hallado en "+cont+" iteraciones.";
 		else if(denominador==0)return "el denominador se hizo cero.";
 		else return "Se ha fracasado con "+cont+" iteraciones";
 	}
