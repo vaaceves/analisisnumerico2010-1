@@ -15,7 +15,7 @@ public class Biseccion extends MetodoPadre implements MetodoInterfaz {
 	 * 
 	 */
 	public static void main(String[] args){
-		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOCONSOLA, "Metodo de Biseccion", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
+		GestorMetodos.ejecutar(Constantes.BISECCION, Constantes.MODOGRAFICOINTERFAZ1, "Metodo de Biseccion", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class Biseccion extends MetodoPadre implements MetodoInterfaz {
 				adicionarFilaResultados(cont,xi,xs,xm,ym,error);
 				cont++;
 			}
-			if(ym==0)return xm+"es raiz. Hallado en "+cont+" iteraciones.";
-			else if(error<=tolerancia)return xm+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";
+			if(ym==0)return xFormat(xm)+"es raiz. Hallado en "+cont+" iteraciones.";
+			else if(error<=tolerancia)return xFormat(xm)+" es raiz con un error relativo de "+eFormat(error)+". Hallado en "+cont+" iteraciones.";
 			else return "Se ha fracasado con "+cont+" iteraciones";
 		}
 	}

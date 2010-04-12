@@ -20,14 +20,14 @@ public class BusquedasIncrementales extends MetodoPadre implements MetodoInterfa
 
 	@Override
 	public String metodo(double... entradas)  throws AnalisisException {
-		this.adicionarFilaTitulos("iteracion","xi","xs");
+		this.adicionarFilaTitulos("iteracion","xi","xs", "y0", "y1");
 		double xi=entradas[0];
 		double delta = entradas[1];
 		double iteraciones = entradas[2];	
 		double y0=f(xi);
 		
 		if(y0==0){
-			return xi + "es raiz";
+			return xFormat(xi) + "es raiz";
 		}else{
 			double xs=xi+delta;
 			double y1=f(xs);
@@ -41,8 +41,8 @@ public class BusquedasIncrementales extends MetodoPadre implements MetodoInterfa
 				cont++;
 				adicionarFilaResultados(cont,xi,xs,y0,y1);
 			}
-			if(y1==0) return xs + "es raiz";
-			else if(y0*y1<0) return "Intervalo: entre "+ xi +" y "+ xs + "hallado en "+ cont +"numero de iteraciones";
+			if(y1==0) return xFormat(xs) + "es raiz";
+			else if(y0*y1<0) return "Intervalo: entre "+ xFormat(xi) +" y "+ xFormat(xs) + "hallado en "+ cont +"numero de iteraciones";
 			else return "numero maximo de iteraciones";			
 		}
 		

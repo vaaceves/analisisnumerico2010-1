@@ -15,12 +15,17 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 	public static void main(String[] args) {
 		//String[] fPre = {"3x^2-4"};
 		//double[] valPre = {-1.0,4.0,5.0,20.0};
-		GestorMetodos.ejecutar(Constantes.REGLAFALSA, Constantes.MODOGRAFICOINTERFAZ1, "Método de regla falsa", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
+		//GestorMetodos.ejecutar(Constantes.REGLAFALSA, Constantes.MODOGRAFICOINTERFAZ1, "Método de regla falsa", "f", null, null, "Xi", "Xs", "Cifras significativas", "iteraciones");
+		double xi=-3;
+		double xs=1;
+		double yi=-2;
+		double ys = 2;
+		double resul = xi-((yi*(xi-xs))/(yi-ys));
+		System.out.println(resul);
 	}
 
 	@Override
 	public String metodo(double... entradas) throws AnalisisException {
-		// TODO Auto-generated method stub
 		this.adicionarFilaTitulos("iteracion","xi","xs","xm","f(xm)","f(xi)","f(xs)","error");
 		double xi=entradas[0];
 		double xs=entradas[1];
@@ -40,7 +45,7 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 			double ym=f(xm);
 			double denominador=(yi-ys);
 			adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,-1.0);
-			while(ym!=0&&error>tolerancia&&cont<iteraciones&&denominador!=0){
+			while(ym!=0&&error>tolerancia&&denominador!=0&&cont<iteraciones){
 				if(yi*ym<0){
 					xs=xm;
 					ys=ym;
@@ -52,15 +57,15 @@ public class ReglaFalsa extends MetodoPadre implements MetodoInterfaz{
 				xAux=xm;
 				xm=xi-((yi*(xi-xs))/(yi-ys));
 				ym=f(xm);
-				error = Math.abs(xm-xAux)/xm;
+				error = Math.abs(xm-xAux)/Math.abs(xm);
 				cont++;
 				denominador=(yi-ys);
 				adicionarFilaResultados(cont,xi,xs,xm,ym,yi,ys,error);
 			}
 			
-			if(ym==0)return xm+"es raiz. Hallado en "+cont+" iteraciones.";
-			else if(error<=tolerancia)return xm+" es raiz con un error relativo de "+error+". Hallado en "+cont+" iteraciones.";
-			else if(denominador==0)return "Division por cero.";
+			if(ym==0)return xFormat(xm)+"es raiz. Hallado en "+cont+" iteraciones.";
+			else if(error<=tolerancia)return xFormat(xm)+" es raiz con un error relativo de "+eFormat(error)+". Hallado en "+cont+" iteraciones.";
+			else if(denominador==0)return "Fracaso por division por cero.";
 			else return "Se ha fracasado con "+cont+" iteraciones";
 		}
 	}
