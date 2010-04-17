@@ -14,6 +14,7 @@ public interface MetodoInterfaz {
 	 * @return el mensaje de exito o fracaso
 	 */
 	public String metodo(double... entradas) throws AnalisisException;
+
 	
 	/**
 	 * Ejecuta la funcion en una serie de valores

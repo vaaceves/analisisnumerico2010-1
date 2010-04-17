@@ -8,7 +8,7 @@ import co.edu.eafit.analisisnumerico.framework.*;
  * * @author Equipo analisis
  *
  */
-public class RaicesMultiples extends MetodoPadre implements MetodoInterfaz {
+public class RaicesMultiples extends MetodoUnidad1 implements MetodoInterfaz {
 
 	/**
 	 * Funcion Main. Ejecuta Raices multiples

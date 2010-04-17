@@ -4,10 +4,10 @@ import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.GestorMetodos;
 import co.edu.eafit.analisisnumerico.framework.MetodoInterfaz;
-import co.edu.eafit.analisisnumerico.framework.MetodoPadre;
+import co.edu.eafit.analisisnumerico.framework.MetodoUnidad1;
 import co.edu.eafit.analisisnumerico.framework.UtilConsola;
 
-public class Secante extends MetodoPadre implements MetodoInterfaz{
+public class Secante extends MetodoUnidad1 implements MetodoInterfaz{
 
 	/**
 	 * @param args

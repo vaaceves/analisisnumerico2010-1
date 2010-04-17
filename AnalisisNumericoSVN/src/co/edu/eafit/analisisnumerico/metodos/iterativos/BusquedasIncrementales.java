@@ -4,14 +4,14 @@ import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.GestorMetodos;
 import co.edu.eafit.analisisnumerico.framework.MetodoInterfaz;
-import co.edu.eafit.analisisnumerico.framework.MetodoPadre;
+import co.edu.eafit.analisisnumerico.framework.MetodoUnidad1;
 
 /**
  * metodo de búsquedas incrementales
  * @author Daniela
  *
  */
-public class BusquedasIncrementales extends MetodoPadre implements MetodoInterfaz{
+public class BusquedasIncrementales extends MetodoUnidad1 implements MetodoInterfaz{
 
 	public static void main(String[] args) {
 		//double[] valoresIniciales = {3.5,4.0,5.0,20};
