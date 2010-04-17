@@ -1,4 +1,4 @@
-package co.edu.eafit.analisisnumerico.metodos;
+package co.edu.eafit.analisisnumerico.metodos.iterativos;
 
 import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.Constantes;

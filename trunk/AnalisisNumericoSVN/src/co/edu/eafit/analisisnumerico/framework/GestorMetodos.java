@@ -6,13 +6,13 @@ import javax.swing.table.DefaultTableModel;
 import org.nfunk.jep.JEP;
 
 import co.edu.eafit.analisisnumerico.GUI.ResultadosInterfaz1;
-import co.edu.eafit.analisisnumerico.metodos.Biseccion;
-import co.edu.eafit.analisisnumerico.metodos.BusquedasIncrementales;
-import co.edu.eafit.analisisnumerico.metodos.Newton;
-import co.edu.eafit.analisisnumerico.metodos.PuntoFijo;
-import co.edu.eafit.analisisnumerico.metodos.RaicesMultiples;
-import co.edu.eafit.analisisnumerico.metodos.ReglaFalsa;
-import co.edu.eafit.analisisnumerico.metodos.Secante;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.Biseccion;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.BusquedasIncrementales;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.Newton;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.PuntoFijo;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.RaicesMultiples;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.ReglaFalsa;
+import co.edu.eafit.analisisnumerico.metodos.iterativos.Secante;
 
 /**
  * Clase Gestor Metodos. Posee la fabrica de metodos y la ejecucion dinamica de los mismos
