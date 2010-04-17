@@ -101,19 +101,19 @@ public class Principal {
 		boolean gxOk=true;
 		boolean fdevOk = true;
 		boolean fddOk = true;
-		if(MetodoPadre.getParserF()==null){
+		if(MetodoUnidad1.getParserF()==null){
 			String fx = gui.getTxtFx().getText();
 			fxOk= crearF(fx, "f");
 		}
-		if(MetodoPadre.getParserG()==null){
+		if(MetodoUnidad1.getParserG()==null){
 			String gx = gui.getTxtG().getText();
 			gxOk= crearF(gx, "g");
 		}
-		if(MetodoPadre.getParserFdev()==null){
+		if(MetodoUnidad1.getParserFdev()==null){
 			String fdevx = gui.getTxtFdev().getText();
 			fdevOk= crearF(fdevx, "fdev");
 		}
-		if(MetodoPadre.getParserFdd()==null){
+		if(MetodoUnidad1.getParserFdd()==null){
 			String fddx = gui.getFdd().getText();
 			fddOk= crearF(fddx, "fdd");
 		}
@@ -139,7 +139,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoPadre.setParserF(parser);
+				MetodoUnidad1.setParserF(parser);
 				return true;
 			}
 		}
@@ -149,7 +149,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoPadre.setParserG(parser);
+				MetodoUnidad1.setParserG(parser);
 				return true;
 			}
 		}
@@ -159,7 +159,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoPadre.setParserFdev(parser);
+				MetodoUnidad1.setParserFdev(parser);
 				return true;
 			}
 		}
@@ -169,7 +169,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoPadre.setParserFdd(parser);
+				MetodoUnidad1.setParserFdd(parser);
 				return true;
 			}
 		}

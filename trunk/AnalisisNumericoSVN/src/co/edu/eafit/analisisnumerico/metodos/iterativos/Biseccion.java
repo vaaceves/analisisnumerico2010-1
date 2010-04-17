@@ -8,7 +8,7 @@ import co.edu.eafit.analisisnumerico.framework.*;
  * * @author Sebastian
  *
  */
-public class Biseccion extends MetodoPadre implements MetodoInterfaz {
+public class Biseccion extends MetodoUnidad1 implements MetodoInterfaz {
 
 	/**
 	 * Funcion Main. Ejecuta Biseccion

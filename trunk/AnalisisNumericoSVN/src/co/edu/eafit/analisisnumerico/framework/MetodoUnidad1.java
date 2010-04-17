@@ -12,7 +12,7 @@ import org.nfunk.jep.JEP;
  * @author Sebastian Velez
  * 
  */
-public abstract class MetodoPadre implements MetodoInterfaz{
+public abstract class MetodoUnidad1 implements MetodoInterfaz{
 
 	static private JEP parserF;
 	static private JEP parserG;
@@ -194,7 +194,7 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 * @param parserF the parserF to set
 	 */
 	public static void setParserF(JEP parserF) {
-		MetodoPadre.parserF = parserF;
+		MetodoUnidad1.parserF = parserF;
 	}
 	/**
 	 * @return the parserG
@@ -206,7 +206,7 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 * @param parserG the parserG to set
 	 */
 	public static void setParserG(JEP parserG) {
-		MetodoPadre.parserG = parserG;
+		MetodoUnidad1.parserG = parserG;
 	}
 	/**
 	 * @return the parserFdev
@@ -218,7 +218,7 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 * @param parserFdev the parserFdev to set
 	 */
 	public static void setParserFdev(JEP parserFdev) {
-		MetodoPadre.parserFdev = parserFdev;
+		MetodoUnidad1.parserFdev = parserFdev;
 	}
 	/**
 	 * @return the parserFdd
@@ -230,7 +230,7 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	 * @param parserFdd the parserFdd to set
 	 */
 	public static void setParserFdd(JEP parserFdd) {
-		MetodoPadre.parserFdd = parserFdd;
+		MetodoUnidad1.parserFdd = parserFdd;
 	}
 	
 	

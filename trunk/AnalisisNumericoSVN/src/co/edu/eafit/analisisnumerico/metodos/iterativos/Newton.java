@@ -8,7 +8,7 @@ import co.edu.eafit.analisisnumerico.framework.*;
  * * @author Equipo analisis
  *
  */
-public class Newton extends MetodoPadre implements MetodoInterfaz {
+public class Newton extends MetodoUnidad1 implements MetodoInterfaz {
 
 	/**
 	 * Funcion Main. Ejecuta Newton

@@ -4,7 +4,7 @@ import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.GestorMetodos;
 import co.edu.eafit.analisisnumerico.framework.MetodoInterfaz;
-import co.edu.eafit.analisisnumerico.framework.MetodoPadre;
+import co.edu.eafit.analisisnumerico.framework.MetodoUnidad1;
 import co.edu.eafit.analisisnumerico.framework.UtilConsola;
 
 /**
@@ -12,7 +12,7 @@ import co.edu.eafit.analisisnumerico.framework.UtilConsola;
  * @author Daniela
  *
  */
-public class PuntoFijo  extends MetodoPadre implements MetodoInterfaz{
+public class PuntoFijo  extends MetodoUnidad1 implements MetodoInterfaz{
 
 	/**
 	 * @param args
