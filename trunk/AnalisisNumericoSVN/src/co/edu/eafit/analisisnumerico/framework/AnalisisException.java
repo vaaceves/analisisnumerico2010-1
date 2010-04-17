@@ -19,8 +19,6 @@ public class AnalisisException extends Throwable{
 	public AnalisisException(String msg){
 		super(msg);
 		JOptionPane.showMessageDialog(null, msg, "Analisis Numerico Exception", JOptionPane.ERROR_MESSAGE);
-		
-		
 	}
 
 	/* (non-Javadoc)

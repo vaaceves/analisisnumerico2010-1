@@ -1,5 +1,6 @@
 package co.edu.eafit.analisisnumerico.framework;
 
+import java.text.DecimalFormat;
 import java.util.Vector;
 
 import org.nfunk.jep.JEP;
@@ -13,13 +14,23 @@ import org.nfunk.jep.JEP;
  */
 public abstract class MetodoPadre implements MetodoInterfaz{
 
-	private JEP parserF;
-	private JEP parserG;
-	private JEP parserFdev;
-	private JEP parserFdd;
+	static private JEP parserF;
+	static private JEP parserG;
+	static private JEP parserFdev;
+	static private JEP parserFdd;
 	private Vector<Vector<Double>> datos;
 	private Vector<String> titulos;
-
+	
+	/**
+	 * formato para las X 
+	 */
+	static private final DecimalFormat xFormat = new DecimalFormat("000.#####");
+	
+	/**
+	 * Formato para los errores y funciones
+	 */
+	static private final DecimalFormat eFormat = new DecimalFormat("0.##E00");
+	
 	/**
 	 * 
 	 * @param fila: la fila de resultado a añadir a la tabla
@@ -53,6 +64,14 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 		}
 	}
 
+	public String xFormat(double valor){
+		return xFormat.format(valor);
+	}
+	
+	public String eFormat(double valor){
+		return eFormat.format(valor);
+	}
+	
 	/**
 	 * Funcion que retorna una matriz de objetos para el objeto JTable.
 	 * Debe ejecutarse solo al final
@@ -77,10 +96,19 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 	public Object[][] generarMatrizSinTitulos(){
 		if(datos==null||datos.size()==0)return new Object[0][titulos.size()];
 		Object[][] matriz = new Object[datos.get(0).size()][datos.size()];
+		DecimalFormat decimalFormat = new DecimalFormat("0.####E00");
 		//adiciono el resto
 		for(int i=0;i<matriz.length;i++){
 			for(int j=0;j<matriz[0].length;j++){
-				matriz[i][j]=datos.get(j).get(i);
+				if(titulos.get(j).toLowerCase().startsWith("ite")){
+					matriz[i][j]=datos.get(j).get(i);
+				}
+				else if(titulos.get(j).toLowerCase().startsWith("x")){
+					matriz[i][j]=datos.get(j).get(i);
+				}
+				else{
+					matriz[i][j] = decimalFormat.format(datos.get(j).get(i));
+				}
 			}
 		}
 		return matriz;
@@ -156,43 +184,54 @@ public abstract class MetodoPadre implements MetodoInterfaz{
 		}
 		return parserG.getValue();
 	}
-	
+	/**
+	 * @return the parserF
+	 */
+	public static JEP getParserF() {
+		return parserF;
+	}
 	/**
 	 * @param parserF the parserF to set
 	 */
-	public void setParserF(JEP parserF) {
-		this.parserF = parserF;
+	public static void setParserF(JEP parserF) {
+		MetodoPadre.parserF = parserF;
+	}
+	/**
+	 * @return the parserG
+	 */
+	public static JEP getParserG() {
+		return parserG;
 	}
 	/**
 	 * @param parserG the parserG to set
 	 */
-	public void setParserG(JEP parserG) {
-		this.parserG = parserG;
+	public static void setParserG(JEP parserG) {
+		MetodoPadre.parserG = parserG;
 	}
 	/**
 	 * @return the parserFdev
 	 */
-	public JEP getParserFdev() {
+	public static JEP getParserFdev() {
 		return parserFdev;
 	}
 	/**
 	 * @param parserFdev the parserFdev to set
 	 */
-	public void setParserFdev(JEP parserFdev) {
-		this.parserFdev = parserFdev;
+	public static void setParserFdev(JEP parserFdev) {
+		MetodoPadre.parserFdev = parserFdev;
 	}
 	/**
 	 * @return the parserFdd
 	 */
-	public JEP getParserFdd() {
+	public static JEP getParserFdd() {
 		return parserFdd;
 	}
 	/**
 	 * @param parserFdd the parserFdd to set
 	 */
-	public void setParserFdd(JEP parserFdd) {
-		this.parserFdd = parserFdd;
+	public static void setParserFdd(JEP parserFdd) {
+		MetodoPadre.parserFdd = parserFdd;
 	}
-
+	
 	
 }

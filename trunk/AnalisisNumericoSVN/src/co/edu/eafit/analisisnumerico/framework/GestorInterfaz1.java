@@ -13,10 +13,15 @@ import co.edu.eafit.analisisnumerico.GUI.MetodoGUI1;
  */
 public class GestorInterfaz1 {
 	MetodoGUI1 interfaz = new MetodoGUI1();
-	private static final String TEXTOINICIO="Ingrese ";
+	private static final String TEXTOINICIO="";
 	private static final String TEXTOFIN=":";
 	int numVariables=0;
 	int numFunciones=0;
+	
+	
+	public void otro()throws AnalisisException{
+		if(numVariables>5)throw new AnalisisException("The number of fields cannot be more than 5");
+	}
 	
 	/**
 	 * pinta en pantalla la interfaz
@@ -29,10 +34,9 @@ public class GestorInterfaz1 {
 	 */
 	public void pintar(int tipoMetodo, String titulo, int numFunciones, String funciones, String...strings) throws AnalisisException{
 		numVariables=strings.length;
-		this.numFunciones=numFunciones;
-		if((strings.length+numFunciones)>8)throw new AnalisisException("Esta interfaz solo permite un maximo de 8 entradas");
+		if((strings.length)>8)throw new AnalisisException("Esta interfaz solo permite un maximo de 8 entradas");
 		if(strings.length==0||strings==null)throw new AnalisisException("Debe ingresar como minimo una entrada");
-		coordinarLabelsYTextBox(strings, funciones);
+		coordinarLabelsYTextBox(strings);
 		crearTitulo(titulo);
 		generarEventos();
 		interfaz.setVisible(true);
@@ -79,7 +83,6 @@ public class GestorInterfaz1 {
 				}
 			}
 		}
-		GestorMetodos.crearFunciones(valoresFunciones);
 		double[] resul = new double[valores.size()];
 		for(int i=0;i<valores.size();i++){
 			resul[i]=valores.get(i);
@@ -103,11 +106,9 @@ public class GestorInterfaz1 {
 		
 	}
 
-	private void coordinarLabelsYTextBox(String[] variables, String funcion) {
-		String[] funciones = funcion.split(",");
-		String[] s = new String[funciones.length+variables.length];
+	private void coordinarLabelsYTextBox(String[] variables) {
+		String[] s = new String[variables.length];
 		int i=0;
-		for(;i<funciones.length;i++)s[i]=funciones[i]+"(x)";
 		for(int j=0;i<s.length;i++){
 			s[i]=variables[j];
 			j++;

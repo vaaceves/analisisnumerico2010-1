@@ -54,11 +54,41 @@ public class GestorMetodos {
 			ejecutarMetodo(entradas);
 		}
 		else if(modo==Constantes.MODOGRAFICOINTERFAZ1){
-			GestorInterfaz1 gi1 = new GestorInterfaz1();
-			try {
-				gi1.pintar(numMetodo,titulo, funciones.split(",").length, funciones,  strings);
-			} catch (AnalisisException e) {}
+			boolean resul = validarFuncionesNecesarias();
+			if(resul){
+				GestorInterfaz1 gi1 = new GestorInterfaz1();
+				try {
+					gi1.pintar(numMetodo,titulo, funciones.split(",").length, funciones,  strings);
+				} catch (AnalisisException e) {}
+			}
+			
 		}
+	}
+
+	private static boolean validarFuncionesNecesarias() {
+		Principal p = Principal.getInstance();
+		boolean fOk = p.crearFuncionesNuevas();
+		if(!fOk)return false;
+		String[] funcionesNecesarias = funciones.split(",");
+		for(String s : funcionesNecesarias){
+			if(s.equals("f")&&MetodoPadre.getParserF()==null){
+				new AnalisisException("La Funcion f(x) es necesaria para este método y no se ha inicializado");
+				return false;
+			}
+			else if(s.equals("g")&&MetodoPadre.getParserG()==null){
+				new AnalisisException("La Funcion g(x) es necesaria para este método y no se ha inicializado");
+				return false;
+			}
+			else if(s.equals("fdev")&&MetodoPadre.getParserFdev()==null){
+				new AnalisisException("La primera derivada de f(x) es necesaria para este método y no se ha inicializado");
+				return false;
+			}
+			else if(s.equals("fdd")&&MetodoPadre.getParserFdd()==null){
+				new AnalisisException("La segunda derivada de f(x) es necesaria para este método y no se ha inicializado");
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private static void ejecutarMetodoConsola(double... entradas) {
