@@ -11,15 +11,30 @@
 
 package co.edu.eafit.analisisnumerico.GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import co.edu.eafit.analisisnumerico.framework.AnalisisException;
+import co.edu.eafit.analisisnumerico.framework.Principal;
+
 /**
  *
- * @author nico
+ * @author sebastian
  */
 public class MetodoGUI1 extends javax.swing.JFrame {
 
     /** Creates new form Pantalla3 */
     public MetodoGUI1() {
         initComponents();
+        btnCerrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MetodoGUI1.this.setVisible(false);
+			}
+		});
     }
 
     /** This method is called from within the constructor to
@@ -30,6 +45,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+    	
     	panelFondo = new JPanelConFondo();
         lbl1 = new javax.swing.JLabel();
         txt1 = new javax.swing.JTextField();
@@ -49,8 +65,8 @@ public class MetodoGUI1 extends javax.swing.JFrame {
         txt6 = new javax.swing.JTextField();
         lbl7 = new javax.swing.JLabel();
         lbl6 = new javax.swing.JLabel();
-        btnVerAyudaLocal = new javax.swing.JButton();
-        btnVerAyudaExterna = new javax.swing.JButton();
+        btnVerAyuda = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
         lblFinal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,14 +100,58 @@ public class MetodoGUI1 extends javax.swing.JFrame {
         lbl6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbl6.setText("Ingrese");
 
-        btnVerAyudaLocal.setText("Ver ayuda local");
-        btnVerAyudaLocal.addActionListener(new java.awt.event.ActionListener() {
+        btnVerAyuda.setText("Ayuda");
+        this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				Principal.getInstance().gui.setVisible(true);
+				return;
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				Principal.getInstance().gui.setVisible(true);
+				return;
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        btnVerAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerAyudaLocalActionPerformed(evt);
             }
         });
 
-        btnVerAyudaExterna.setText("Ver ayuda externa");
+        btnCerrar.setText("Cerrar");
 
         lblFinal.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         lblFinal.setText("Powered by Analisis Numerico Framework");
@@ -154,8 +214,8 @@ public class MetodoGUI1 extends javax.swing.JFrame {
                                             .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                             .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnVerAyudaExterna)
-                                .addComponent(btnVerAyudaLocal)
+                                .addComponent(btnCerrar)
+                                .addComponent(btnVerAyuda)
                                 .addComponent(btnSolucionar))
                             .addGap(18, 18, 18))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -189,7 +249,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl4)))
-                    .addComponent(btnVerAyudaLocal))
+                    .addComponent(btnVerAyuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +262,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnVerAyudaExterna))
+                        .addComponent(btnCerrar))
                     .addComponent(lbl7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -322,7 +382,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
         );
 /////////////////////////////////////////////////
         pack();
-        ((JPanelConFondo) panelFondo).setImagen("recursos/logo.jpg");
+        ((JPanelConFondo) panelFondo).setImagen("/co/edu/eafit/analisisnumerico/GUI/Logo.JPG");
     }// </editor-fold>
 
     private void btnVerAyudaLocalActionPerformed(java.awt.event.ActionEvent evt) {                                                 
@@ -343,8 +403,8 @@ public class MetodoGUI1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
     public javax.swing.JButton btnSolucionar;
-    public javax.swing.JButton btnVerAyudaExterna;
-    public javax.swing.JButton btnVerAyudaLocal;
+    public javax.swing.JButton btnCerrar;
+    public javax.swing.JButton btnVerAyuda;
     public javax.swing.JLabel lbl1;
     public javax.swing.JLabel lbl2;
     public javax.swing.JLabel lbl3;
@@ -364,6 +424,4 @@ public class MetodoGUI1 extends javax.swing.JFrame {
     public javax.swing.JTextField txt7;
     public javax.swing.JTextField txt8;
     private javax.swing.JPanel panelFondo;
-    // End of variables declaration
-
 }
