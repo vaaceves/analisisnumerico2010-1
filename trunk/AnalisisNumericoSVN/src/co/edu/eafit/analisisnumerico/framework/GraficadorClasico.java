@@ -5,7 +5,7 @@ package Graficador;
  * @author Walter Mora F/ITCR/2006
  * @version 1.00 06/03/16
  */
-
+//
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
@@ -19,6 +19,8 @@ import org.nfunk.jep.*;
 import org.nfunk.jep.type.*;
 
 public class GraficadorClasico extends JFrame{
+	
+	//new GraficadorClasico().setVisible(true);
     private JEP miEvaluador;
     boolean errorEnExpresion; //si hay error de sintaxis en la funci�n
     boolean errorEnNumero   ; //si hay error de sintaxis en la funci�n
@@ -43,6 +45,7 @@ public class GraficadorClasico extends JFrame{
     final static float dash1[] = {5.0f};
     final static BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 5.0f, dash1, 0.0f);
     public static boolean limpi=false;
+    public static boolean escala=false;
   /*  public static void main(String[] ars){
         new GraficadorClasico().setVisible(true);
     }*/
@@ -225,6 +228,11 @@ public class GraficadorClasico extends JFrame{
         		GraficadorClasico.limpi=false;
         		
         	}
+        	if(GraficadorClasico.escala==true){
+        		super.paintComponent(g);       // clear to background color
+        		GraficadorClasico.escala=false;
+        		Graficar(g, x0, y0);
+        	}
         }
         
         void Graficar(Graphics ap, int xg, int yg) {
@@ -348,6 +356,7 @@ public class GraficadorClasico extends JFrame{
         public void ajusteEscala() { // se ejecuta si se 'oy�' alg�n cambio en alg�n Slider
             escalaX =(int) xSlider.getValue();
             escalaY =(int) ySlider.getValue();
+            GraficadorClasico.escala=true;
             ZG.repaint();
         }
         
