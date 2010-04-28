@@ -1,4 +1,4 @@
-package Graficador;
+package co.edu.eafit.analisisnumerico.framework;
 
 /**
  * @(#)GraficadorClasico
