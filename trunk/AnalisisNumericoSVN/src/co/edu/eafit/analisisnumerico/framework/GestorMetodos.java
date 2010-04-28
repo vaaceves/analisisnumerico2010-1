@@ -86,8 +86,6 @@ public class GestorMetodos {
 		for(int i=0;i<mPadreU2.x.length;i++){
 			System.out.println("X"+(mPadreU2.x[i].getMarca()+1)+": "+mPadreU2.x[i].getValor());
 		}
-
-
 	}
 
 
