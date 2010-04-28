@@ -1,9 +1,8 @@
 package co.edu.eafit.analisisnumerico.framework;
 
-import java.text.DecimalFormat;
-import java.util.Vector;
 
-public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
+import java.text.DecimalFormat;
+public abstract class MetodoUnidad2{
 
 	/**
 	 * formato para las X 
@@ -20,9 +19,10 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	protected DatoMatriz[][] matriz;
 	public int n;
 	public DatoMatriz[] b;
+	public int[] m; //Vector de marcas necesario para LUParcial.
 
 
-	public MetodoUnidad2(Object[][] valores) throws AnalisisException{
+	public MetodoUnidad2(Object[][] valores) throws AnalisisException{		
 		matriz= new DatoMatriz[valores.length][valores[0].length];
 		x= new Termino[valores.length];
 		matrizMultiplicadores= new double[valores.length][valores.length];
@@ -45,6 +45,10 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		b= new DatoMatriz[valores.length];
 		for(int i=0;i<b.length;i++){
 			b[i] = matriz[i][matriz[0].length-1];
+		}
+		m = new int[valores.length];
+		for (int i=0;i<m.length;i++){
+			m[i]=matriz[0][i].getMarca();
 		}
 	}
 
@@ -148,7 +152,7 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		}
 		matriz=nuevaMatriz;
 	}
-	
+
 	public void gaussEnEtapa(int k){
 		for(int i=k+1;i<n;i++){
 			addMultiplicador(i, k);
@@ -165,5 +169,31 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 			matriz[k][i] = matriz[row][i];
 			matriz[row][i] = dAuxiliar;
 		}
+	}
+
+	public void intercambiarColumnas(int col, int k)
+	{
+		for(int i=k;i<matriz[0].length;i++){
+			DatoMatriz dAuxiliar = matriz[k][i];
+			matriz[k][i] = matriz[col][i];
+			matriz[col][i] = dAuxiliar;
+		}
+	}
+
+	//hace gauss sobre el vector B
+	public void gaussEnB(int k)
+	{
+		for(int i=k+1;i<n;i++){
+			b[i].setValor(b[i].getValor()-getMultiplicador(i,k)*b[k].getValor());
+		}
+	}
+
+
+	//intercambia las filas del vector B teniendo en cuenta el vector de marcas
+	public void intercambiarFilasB(int row, int k)
+	{
+		DatoMatriz dAuxiliar = b[k];
+		b[k] = b[row];
+		b[row] = dAuxiliar;
 	}
 }
