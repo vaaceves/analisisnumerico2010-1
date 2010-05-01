@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.DatoMatriz;
-import co.edu.eafit.analisisnumerico.framework.GestorInterfaz2;
+import co.edu.eafit.analisisnumerico.framework.GestorInterfazPrincipalSistemasEcuaciones;
 
 /*
  * SistemasdeEcuaciones.java
@@ -29,93 +29,9 @@ public class MetodoGUI2 extends javax.swing.JFrame {
     /** Creates new form SistemasdeEcuaciones */
     public MetodoGUI2() {
         initComponents();
-        //adiciona componente para crear la tabla dinamicamente
-        this.txtTamanoMatriz.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				//MetodoGUI2.this.crearTabla();
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				MetodoGUI2.this.crearTabla();
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				//MetodoGUI2.this.crearTabla();	
-			}
-		});
-        fnBusquedas.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				GestorInterfaz2.ejecutarMetodo(Constantes.LUSIMPLE);
-			}
-		});
     }
 
     
-    protected void crearTabla() {
-    	try{
-    		tamano = Integer.parseInt(txtTamanoMatriz.getText().trim());
-    		if(tamano>30)return;
-    	}
-		catch(Exception e){
-			tamano=4;
-			Object[] titulos = new Object[tamano+1];
-			for(int i=0;i<tamano+1;i++){
-				if(i==tamano){
-					titulos[i] = "B";
-				}
-				else{
-					titulos[i] = new String("X"+(i+1));
-				}
-				
-			}
-			Object[][] datos = {{"20","-1","1","-1","8"},{"5","35","-4","8","50"},{"2","-10","75","-1","-114"},{"3","-7","4","-27","10"}};
-			
-			tablaMatriz.setModel(new DefaultTableModel(datos, titulos));
-			return;
-		}
-		Object[] titulos = new Object[tamano+1];
-		for(int i=0;i<tamano+1;i++){
-			if(i==tamano){
-				titulos[i] = "B";
-			}
-			else{
-				titulos[i] = new String("X"+(i+1));
-			}
-			
-		}
-		Object[][] datos = new Object[tamano][tamano+1];
-		for(int i=0;i<datos.length;i++){
-			for(int j=0;j<datos.length;j++){
-				datos[i][j] = new String("");
-			}
-		}
-
-		tablaMatriz.setModel(new DefaultTableModel(datos, titulos));
-	}
-
-    public Object[][] getTabla(){
-    	Object[][] resul = new Object[tamano][tamano+1];
-    	for(int i=0;i<tamano;i++){
-    		for(int j=0;j<tamano+1;j++){
-    			try{
-    				resul[i][j] = tablaMatriz.getValueAt(i, j).toString();
-    			}
-    			catch(Exception e){
-    				System.out.println(i+","+j);
-    			}
-    			
-    		}
-    	}
-    	return resul;
-    }
     
 	/** This method is called from within the constructor to
      * initialize the form.

@@ -1,5 +1,6 @@
 /*
  * To change this template, choose Tools | Templates
+
  * and open the template in the editor.
  */
 
@@ -11,16 +12,108 @@
 
 package co.edu.eafit.analisisnumerico.GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.table.DefaultTableModel;
+
+import co.edu.eafit.analisisnumerico.framework.Constantes;
+import co.edu.eafit.analisisnumerico.framework.GestorInterfazPrincipalSistemasEcuaciones;
+
 /**
  *
  * @author nico
  */
 public class SistemasEcuacionesGUI extends javax.swing.JFrame {
 
+	/*setea el tamano de la matriz*/
+	int tamano;
+	
     /** Creates new form SistemasEcuacionesGUI */
     public SistemasEcuacionesGUI() {
         initComponents();
+this.txtTamanoMatriz.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				//MetodoGUI2.this.crearTabla();
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				SistemasEcuacionesGUI.this.crearTabla();
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				//MetodoGUI2.this.crearTabla();	
+			}
+		});
     }
+    
+    /*METODOS PROPIOS DE LA LOGICA DEL NEGOCIO*/
+    protected void crearTabla() {
+    	try{
+    		tamano = Integer.parseInt(txtTamanoMatriz.getText().trim());
+    		if(tamano>30)return;
+    	}
+		catch(Exception e){
+			tamano=4;
+			Object[] titulos = new Object[tamano+1];
+			for(int i=0;i<tamano+1;i++){
+				if(i==tamano){
+					titulos[i] = "B";
+				}
+				else{
+					titulos[i] = new String("X"+(i+1));
+				}
+				
+			}
+			Object[][] datos = {{"20","-1","1","-1","8"},{"5","35","-4","8","50"},{"2","-10","75","-1","-114"},{"3","-7","4","-27","10"}};
+			
+			tablaMatriz.setModel(new DefaultTableModel(datos, titulos));
+			return;
+		}
+		Object[] titulos = new Object[tamano+1];
+		for(int i=0;i<tamano+1;i++){
+			if(i==tamano){
+				titulos[i] = "B";
+			}
+			else{
+				titulos[i] = new String("X"+(i+1));
+			}
+			
+		}
+		Object[][] datos = new Object[tamano][tamano+1];
+		for(int i=0;i<datos.length;i++){
+			for(int j=0;j<datos.length;j++){
+				datos[i][j] = new String("");
+			}
+		}
+
+		tablaMatriz.setModel(new DefaultTableModel(datos, titulos));
+	}
+
+    public Object[][] getTabla(){
+    	Object[][] resul = new Object[tamano][tamano+1];
+    	for(int i=0;i<tamano;i++){
+    		for(int j=0;j<tamano+1;j++){
+    			try{
+    				resul[i][j] = tablaMatriz.getValueAt(i, j).toString();
+    			}
+    			catch(Exception e){
+    				System.out.println(i+","+j);
+    			}
+    			
+    		}
+    	}
+    	return resul;
+    }
+
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -663,4 +756,193 @@ public class SistemasEcuacionesGUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtTamanoMatriz;
     // End of variables declaration//GEN-END:variables
 
+    //GETS Y SETYS PARA SETEAR EVENTOS
+    
+	/**
+	 * @return the btnCholesky
+	 */
+	public javax.swing.JButton getBtnCholesky() {
+		return btnCholesky;
+	}
+
+	/**
+	 * @param btnCholesky the btnCholesky to set
+	 */
+	public void setBtnCholesky(javax.swing.JButton btnCholesky) {
+		this.btnCholesky = btnCholesky;
+	}
+
+	/**
+	 * @return the btnCroult
+	 */
+	public javax.swing.JButton getBtnCroult() {
+		return btnCroult;
+	}
+
+	/**
+	 * @param btnCroult the btnCroult to set
+	 */
+	public void setBtnCroult(javax.swing.JButton btnCroult) {
+		this.btnCroult = btnCroult;
+	}
+
+	/**
+	 * @return the btnDolytle
+	 */
+	public javax.swing.JButton getBtnDolytle() {
+		return btnDolytle;
+	}
+
+	/**
+	 * @param btnDolytle the btnDolytle to set
+	 */
+	public void setBtnDolytle(javax.swing.JButton btnDolytle) {
+		this.btnDolytle = btnDolytle;
+	}
+
+	/**
+	 * @return the btnEliminacionGauss
+	 */
+	public javax.swing.JButton getBtnEliminacionGauss() {
+		return btnEliminacionGauss;
+	}
+
+	/**
+	 * @param btnEliminacionGauss the btnEliminacionGauss to set
+	 */
+	public void setBtnEliminacionGauss(javax.swing.JButton btnEliminacionGauss) {
+		this.btnEliminacionGauss = btnEliminacionGauss;
+	}
+
+	/**
+	 * @return the btnGaussSeidel
+	 */
+	public javax.swing.JButton getBtnGaussSeidel() {
+		return btnGaussSeidel;
+	}
+
+	/**
+	 * @param btnGaussSeidel the btnGaussSeidel to set
+	 */
+	public void setBtnGaussSeidel(javax.swing.JButton btnGaussSeidel) {
+		this.btnGaussSeidel = btnGaussSeidel;
+	}
+
+	/**
+	 * @return the btnJacobi
+	 */
+	public javax.swing.JButton getBtnJacobi() {
+		return btnJacobi;
+	}
+
+	/**
+	 * @param btnJacobi the btnJacobi to set
+	 */
+	public void setBtnJacobi(javax.swing.JButton btnJacobi) {
+		this.btnJacobi = btnJacobi;
+	}
+
+	/**
+	 * @return the btnLUGaussianaParcial
+	 */
+	public javax.swing.JButton getBtnLUGaussianaParcial() {
+		return btnLUGaussianaParcial;
+	}
+
+	/**
+	 * @param btnLUGaussianaParcial the btnLUGaussianaParcial to set
+	 */
+	public void setBtnLUGaussianaParcial(javax.swing.JButton btnLUGaussianaParcial) {
+		this.btnLUGaussianaParcial = btnLUGaussianaParcial;
+	}
+
+	/**
+	 * @return the btnLUGaussianaSimple
+	 */
+	public javax.swing.JButton getBtnLUGaussianaSimple() {
+		return btnLUGaussianaSimple;
+	}
+
+	/**
+	 * @param btnLUGaussianaSimple the btnLUGaussianaSimple to set
+	 */
+	public void setBtnLUGaussianaSimple(javax.swing.JButton btnLUGaussianaSimple) {
+		this.btnLUGaussianaSimple = btnLUGaussianaSimple;
+	}
+
+	/**
+	 * @return the btnMatrizBanda
+	 */
+	public javax.swing.JButton getBtnMatrizBanda() {
+		return btnMatrizBanda;
+	}
+
+	/**
+	 * @param btnMatrizBanda the btnMatrizBanda to set
+	 */
+	public void setBtnMatrizBanda(javax.swing.JButton btnMatrizBanda) {
+		this.btnMatrizBanda = btnMatrizBanda;
+	}
+
+	/**
+	 * @return the btnPivoteoParcial
+	 */
+	public javax.swing.JButton getBtnPivoteoParcial() {
+		return btnPivoteoParcial;
+	}
+
+	/**
+	 * @param btnPivoteoParcial the btnPivoteoParcial to set
+	 */
+	public void setBtnPivoteoParcial(javax.swing.JButton btnPivoteoParcial) {
+		this.btnPivoteoParcial = btnPivoteoParcial;
+	}
+
+	/**
+	 * @return the btnPivoteoTotal
+	 */
+	public javax.swing.JButton getBtnPivoteoTotal() {
+		return btnPivoteoTotal;
+	}
+
+	/**
+	 * @param btnPivoteoTotal the btnPivoteoTotal to set
+	 */
+	public void setBtnPivoteoTotal(javax.swing.JButton btnPivoteoTotal) {
+		this.btnPivoteoTotal = btnPivoteoTotal;
+	}
+
+	/**
+	 * @return the btnRegresar
+	 */
+	public javax.swing.JButton getBtnRegresar() {
+		return btnRegresar;
+	}
+
+	/**
+	 * @param btnRegresar the btnRegresar to set
+	 */
+	public void setBtnRegresar(javax.swing.JButton btnRegresar) {
+		this.btnRegresar = btnRegresar;
+	}
+
+	/**
+	 * @return the btnRelajacion
+	 */
+	public javax.swing.JButton getBtnRelajacion() {
+		return btnRelajacion;
+	}
+
+	/**
+	 * @param btnRelajacion the btnRelajacion to set
+	 */
+	public void setBtnRelajacion(javax.swing.JButton btnRelajacion) {
+		this.btnRelajacion = btnRelajacion;
+	}
+
+    
+
+    
+    
+    
 }
