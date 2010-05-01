@@ -24,12 +24,17 @@ public class GaussSimple extends MetodoUnidad2 implements SistemaEcuacionInterfa
 	}
 
 	@Override
-	public void metodoSistema() throws AnalisisException {
+	public String metodoSistema(double... d) throws AnalisisException {
+		String resultado="";
 		for(int k=0;k<n-1;k++){
-			gaussEnEtapa(k);
+			boolean ok= gaussEnEtapa(k);
+			if(!ok)return "Error: Division por cero hallando los multiplicadores en etapa "+(k+1);
+			adicionarMatrizImpresion(matriz, "Etapa "+(k+1));
 		}
 		x=sustitucionRegresiva(matriz);
-		
+		if(x==null)return "Division por cero en uno de los elementos de la diagonal";
+		resultado=imprimirResultadosMatrizTermino();
+		return resultado;
 	}
 	
 	
