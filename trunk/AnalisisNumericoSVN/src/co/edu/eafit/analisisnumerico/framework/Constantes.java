@@ -21,6 +21,15 @@ public final class Constantes {
 	public static final int PIVOTEOTOTAL=10;
 	public static final int PIVOTEOESCALONADO=11;
 	public static final int LUSIMPLE=12;
+	public static final int CROULT=13;
+	public static final int DOOLITTLE=14;
+	public static final int CHOLESKY=15;
+	public static final int LUPIVOTEO=16;
+	public static final int GAUSSSEIDEL=17;
+	public static final int JACOBI=18;
+	public static final int RELAJACION=19;
+	public static final int MATRIZBANDA=20;
+	
 	
 	
 	

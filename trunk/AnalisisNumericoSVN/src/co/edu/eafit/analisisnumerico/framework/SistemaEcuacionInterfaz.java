@@ -8,7 +8,7 @@ public interface SistemaEcuacionInterfaz {
 	 * @param entradas -> todas las entradas que necesite. Recibe n parametros
 	 * @return el mensaje de exito o fracaso
 	 */
-	public void metodoSistema() throws AnalisisException;
+	public String metodoSistema(double... d) throws AnalisisException;
 	
 	
 }

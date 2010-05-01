@@ -14,12 +14,18 @@ import org.nfunk.jep.JEP;
  */
 public abstract class MetodoUnidad1 implements MetodoInterfaz{
 
-	static private JEP parserF;
+	static private  JEP parserF;
 	static private JEP parserG;
 	static private JEP parserFdev;
 	static private JEP parserFdd;
-	private Vector<Vector<Double>> datos;
-	private Vector<String> titulos;
+	static private Vector<Vector<Double>> datos;
+	static private Vector<String> titulos;
+	
+	static public String funcionF;
+	static public String funcionG;
+	static public String funcionFdev;
+	static public String funcionFdd;
+	
 	
 	/**
 	 * formato para las X 
@@ -58,9 +64,9 @@ public abstract class MetodoUnidad1 implements MetodoInterfaz{
 	 * @throws AnalisisException
 	 */
 	public void adicionarFilaTitulos(String... titulos){
-		this.titulos = new Vector<String>();
+		MetodoUnidad1.titulos = new Vector<String>();
 		for(String s: titulos){
-			this.titulos.add(s);
+			MetodoUnidad1.titulos.add(s);
 		}
 	}
 
@@ -150,6 +156,11 @@ public abstract class MetodoUnidad1 implements MetodoInterfaz{
 		return parserFdev.getValue();
 	}
 	
+	public void resetDatos(){
+		datos=null;
+		titulos=null;
+	}
+	
 	/**
 	 * Evalua la funcion ya asignada en los valores dados
 	 * No recibe otra funcion
@@ -193,8 +204,9 @@ public abstract class MetodoUnidad1 implements MetodoInterfaz{
 	/**
 	 * @param parserF the parserF to set
 	 */
-	public static void setParserF(JEP parserF) {
+	public static void setParserF(JEP parserF, String funcion) {
 		MetodoUnidad1.parserF = parserF;
+		funcionF=funcion;
 	}
 	/**
 	 * @return the parserG
@@ -205,8 +217,9 @@ public abstract class MetodoUnidad1 implements MetodoInterfaz{
 	/**
 	 * @param parserG the parserG to set
 	 */
-	public static void setParserG(JEP parserG) {
+	public static void setParserG(JEP parserG, String funcion) {
 		MetodoUnidad1.parserG = parserG;
+		funcionG=funcion;
 	}
 	/**
 	 * @return the parserFdev
@@ -217,20 +230,22 @@ public abstract class MetodoUnidad1 implements MetodoInterfaz{
 	/**
 	 * @param parserFdev the parserFdev to set
 	 */
-	public static void setParserFdev(JEP parserFdev) {
+	public static  void setParserFdev(JEP parserFdev, String funcion) {
 		MetodoUnidad1.parserFdev = parserFdev;
+		funcionFdev=funcion;
 	}
 	/**
 	 * @return the parserFdd
 	 */
-	public static JEP getParserFdd() {
+	public static  JEP getParserFdd() {
 		return parserFdd;
 	}
 	/**
 	 * @param parserFdd the parserFdd to set
 	 */
-	public static void setParserFdd(JEP parserFdd) {
+	public  static void setParserFdd(JEP parserFdd, String funcion) {
 		MetodoUnidad1.parserFdd = parserFdd;
+		funcionFdd=funcion;
 	}
 	
 	
