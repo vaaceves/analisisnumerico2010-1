@@ -17,7 +17,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import co.edu.eafit.analisisnumerico.framework.AnalisisException;
-import co.edu.eafit.analisisnumerico.framework.Principal;
+import co.edu.eafit.analisisnumerico.framework.GestorAyuda;
+import co.edu.eafit.analisisnumerico.framework.PrincipalUnidad1;
 
 /**
  *
@@ -33,6 +34,13 @@ public class MetodoGUI1 extends javax.swing.JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MetodoGUI1.this.setVisible(false);
+			}
+		});
+        btnVerAyuda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestorAyuda.getInstance().mostrarAyudaMetodo();
 			}
 		});
     }
@@ -129,13 +137,13 @@ public class MetodoGUI1 extends javax.swing.JFrame {
 			
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				Principal.getInstance().gui.setVisible(true);
+				PrincipalUnidad1.getInstance().gui.setVisible(true);
 				return;
 			}
 			
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				Principal.getInstance().gui.setVisible(true);
+				PrincipalUnidad1.getInstance().gui.setVisible(true);
 				return;
 			}
 			

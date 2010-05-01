@@ -11,6 +11,11 @@
 
 package co.edu.eafit.analisisnumerico.GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import co.edu.eafit.analisisnumerico.framework.GestorInterfazPrincipal;
+
 /**
  *
  * @author nico
@@ -20,6 +25,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /** Creates new form MenuPrincipal */
     public MenuPrincipal() {
         initComponents();
+        btnEcuacionesNolineales.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestorInterfazPrincipal.iniciarUnidad1();
+			}
+		});
+        btnSistemasdeEcuaciones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GestorInterfazPrincipal.iniciarSistemasEcuaciones();
+			}
+		});
+        btnGraficador.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GestorInterfazPrincipal.iniciarGraficador();
+			}
+		});
+        
+        
     }
 
     /** This method is called from within the constructor to
