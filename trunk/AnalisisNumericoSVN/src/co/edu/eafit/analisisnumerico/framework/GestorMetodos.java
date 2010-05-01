@@ -1,6 +1,8 @@
 package co.edu.eafit.analisisnumerico.framework;
 
-import javax.swing.JTable;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 import org.nfunk.jep.JEP;
@@ -15,7 +17,9 @@ import co.edu.eafit.analisisnumerico.metodos.iterativos.ReglaFalsa;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.Secante;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.GaussSimple;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.LUSimple;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoEscalonado;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoParcial;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoTotal;
 
 /**
  * Clase Gestor Metodos. Posee la fabrica de metodos y la ejecucion dinamica de los mismos
@@ -27,6 +31,15 @@ public class GestorMetodos {
 	static MetodoUnidad2 mPadreU2;
 	private static String funciones;
 	private static int modo;
+	private static final String TEXTOINICIO="";
+	private static final String TEXTOFIN=":";
+
+	/**Variable global que contiene el metodo activo en el momento*/
+	public static int metodoEjecutandose;
+
+	/**Nombres y orden de las variables (delta, iteraciones, etc) que pueden modificarse en la salida*/
+	public static String[] variablesModificables; 
+
 
 	/**
 	 * Ejecuta un metodo dinamicamente, de acuerdo a los parametros recibidos
@@ -36,6 +49,8 @@ public class GestorMetodos {
 	 * @param strings: Lista de valores a solicitarle al usuario
 	 */
 	public static void ejecutar(int numMetodo, int modo, String titulo, String funciones, String[] funcionesPredeterminadas, double[] valoresPredefinidos, String...strings){
+		variablesModificables=strings;
+		metodoEjecutandose=numMetodo;
 		MetodoUnidad1 mp = GestorMetodos.fabricaMetodosUnidad1(numMetodo);
 		GestorMetodos.modo=modo;
 		GestorMetodos.mPadreU1=mp;
@@ -55,7 +70,7 @@ public class GestorMetodos {
 			else{
 				entradas=valoresPredefinidos;
 			}
-			ejecutarMetodo(entradas);
+			ejecutarMetodoUnidad1(entradas);
 		}
 		else if(modo==Constantes.MODOGRAFICOINTERFAZ1){
 			boolean resul = validarFuncionesNecesarias();
@@ -78,22 +93,26 @@ public class GestorMetodos {
 		}
 		if(mp==null)return;
 		GestorMetodos.mPadreU2=mp;
+		String resultado="";
 		try {
-			mPadreU2.metodoSistema();
+			/*ejecuta el metodo*/
+			resultado = mPadreU2.metodoSistema();
 		} catch (AnalisisException e) {
 			e.printStackTrace();
 		}
-		for(int i=0;i<mPadreU2.x.length;i++){
-			System.out.println("X"+(mPadreU2.x[i].getMarca()+1)+": "+mPadreU2.x[i].getValor());
-		}
+		String[] titulos = new String[mp.datos.size()];
+		for(int i=0;i<titulos.length;i++)titulos[i]="";
+		
+		/*MUESTRA LA INTERFAZ DE SALIDA*/
+		ResultadosInterfaz1 ri1= new ResultadosInterfaz1();
+		ri1.tablaResultados.setModel(new DefaultTableModel(mp.generarMatrizSinTitulos(), titulos));
+		ri1.txtDatosGenerales.setText(generarTextoReferenciaUnidad());
+		ri1.lblResultado.setText("Resultado: "+resultado);
+		ri1.setVisible(true);
 	}
 
-
-
-
-
 	private static boolean validarFuncionesNecesarias() {
-		Principal p = Principal.getInstance();
+		PrincipalUnidad1 p = PrincipalUnidad1.getInstance();
 		boolean fOk = p.crearFuncionesNuevas();
 		if(!fOk)return false;
 		String[] funcionesNecesarias = funciones.split(",");
@@ -130,6 +149,7 @@ public class GestorMetodos {
 		UtilConsola.imprimir(resul);
 	}
 
+	@SuppressWarnings("static-access")
 	public static void crearFunciones(String[] funcionesPredeterminadas) {
 		String[] misFunciones = funciones.split(",");
 		for(int i=0;i<misFunciones.length;i++){
@@ -142,12 +162,13 @@ public class GestorMetodos {
 				if(funcionesPredeterminadas!=null){
 					parser.addVariable("x", 0);
 					parser.parseExpression(funcionesPredeterminadas[i]);
-					mPadreU1.setParserF(parser);
+					mPadreU1.setParserF(parser, funcionesPredeterminadas[i]);
 				}else{
 					try {
+						String funcion="";
 						while(pedir){
 							pedir=false;
-							String funcion = UtilConsola.leerString("Ingrese f(x): ");
+							funcion = UtilConsola.leerString("Ingrese f(x): ");
 							parser.addVariable("x", 0);
 							parser.parseExpression(funcion);
 							if(parser.hasError()){
@@ -155,7 +176,7 @@ public class GestorMetodos {
 								pedir=true;
 							}
 						}
-						mPadreU1.setParserF(parser);
+						mPadreU1.setParserF(parser, funcion);
 					} catch (AnalisisException e) {}
 				}
 			}
@@ -168,12 +189,13 @@ public class GestorMetodos {
 				if(funcionesPredeterminadas!=null){
 					parser.addVariable("x", 0);
 					parser.parseExpression(funcionesPredeterminadas[i]);
-					mPadreU1.setParserG(parser);
+					mPadreU1.setParserG(parser, funcionesPredeterminadas[i]);
 				}else{
 					try {
+						String funcion="";
 						while(pedir){
 							pedir=false;
-							String funcion = UtilConsola.leerString("Ingrese g(x): ");
+							funcion = UtilConsola.leerString("Ingrese g(x): ");
 							parser.addVariable("x", 0);
 							parser.parseExpression(funcion);
 							if(parser.hasError()){
@@ -181,7 +203,7 @@ public class GestorMetodos {
 								pedir=true;
 							}
 						}
-						mPadreU1.setParserG(parser);
+						mPadreU1.setParserG(parser, funcion);
 					} catch (AnalisisException e) {}
 				}
 			}
@@ -194,12 +216,13 @@ public class GestorMetodos {
 				if(funcionesPredeterminadas!=null){
 					parser.addVariable("x", 0);
 					parser.parseExpression(funcionesPredeterminadas[i]);
-					mPadreU1.setParserFdev(parser);
+					mPadreU1.setParserFdev(parser, funcionesPredeterminadas[i]);
 				}else{
 					try {
+						String funcion="";
 						while(pedir){
 							pedir=false;
-							String funcion = UtilConsola.leerString("Ingrese la primer derivada de f(x): ");
+							funcion = UtilConsola.leerString("Ingrese la primer derivada de f(x): ");
 							parser.addVariable("x", 0);
 							parser.parseExpression(funcion);
 							if(parser.hasError()){
@@ -207,7 +230,7 @@ public class GestorMetodos {
 								pedir=true;
 							}
 						}
-						mPadreU1.setParserFdev(parser);
+						mPadreU1.setParserFdev(parser, funcion);
 					} catch (AnalisisException e) {}
 				}
 			}
@@ -220,12 +243,13 @@ public class GestorMetodos {
 				if(funcionesPredeterminadas!=null){
 					parser.addVariable("x", 0);
 					parser.parseExpression(funcionesPredeterminadas[i]);
-					mPadreU1.setParserFdd(parser);
+					mPadreU1.setParserFdd(parser, funcionesPredeterminadas[i]);
 				}else{
 					try {
+						String funcion="";
 						while(pedir){
 							pedir=false;
-							String funcion = UtilConsola.leerString("Ingrese la segunda derivada de f(x): ");
+							funcion = UtilConsola.leerString("Ingrese la segunda derivada de f(x): ");
 							parser.addVariable("x", 0);
 							parser.parseExpression(funcion);
 							if(parser.hasError()){
@@ -233,7 +257,7 @@ public class GestorMetodos {
 								pedir=true;
 							}
 						}
-						mPadreU1.setParserFdd(parser);
+						mPadreU1.setParserFdd(parser, funcion);
 					} catch (AnalisisException e) {}
 				}
 			}
@@ -264,7 +288,9 @@ public class GestorMetodos {
 	private static MetodoUnidad2 fabricaMetodosUnidad2(int metodo, Object[][] matriz) throws AnalisisException {
 		if(metodo==Constantes.GAUSSSIMPLE) return new GaussSimple(matriz);
 		if(metodo==Constantes.PIVOTEOPARCIAL) return new PivoteoParcial(matriz);
+		if(metodo==Constantes.PIVOTEOTOTAL) return new PivoteoTotal(matriz);
 		if(metodo==Constantes.LUSIMPLE) return new LUSimple(matriz);
+		if(metodo==Constantes.PIVOTEOESCALONADO) return new PivoteoEscalonado(matriz);
 		return null;
 	}
 
@@ -296,7 +322,7 @@ public class GestorMetodos {
 	}
 
 
-	public static void ejecutarMetodo(double[] d) {
+	public static void ejecutarMetodoUnidad1(double[] d) {
 		if(modo==Constantes.MODOCONSOLA)ejecutarMetodoConsola(d);
 		else if(modo==Constantes.MODOGRAFICOINTERFAZ1||modo==Constantes.MODOGRAFICOINTERFAZ2)ejecutarMetodoInterfaz(d);
 
@@ -307,14 +333,105 @@ public class GestorMetodos {
 		try {
 			resultado = mPadreU1.metodo(entradas);
 		} catch (AnalisisException e) {}
-		ResultadosInterfaz1 ri1 = new ResultadosInterfaz1();
+		final ResultadosInterfaz1 ri1 = new ResultadosInterfaz1();
 		ri1.lblResultado.setText("Resultado: "+resultado);
 		Object[][] resul = mPadreU1.generarMatrizSinTitulos();
 		Object[] titulos = mPadreU1.getTitulos();
 		//ri1.tablaResultados = new JTable(resul,titulos);
 
 		ri1.tablaResultados.setModel(new DefaultTableModel(resul, titulos));
+		ri1.txtDatosGenerales.setText(generarTextoReferenciaUnidad());
 		ri1.setVisible(true);
+		/*seteo variables modificables en interfaz*/
+		if(variablesModificables!=null&&variablesModificables.length>0){
+			coordinarLabelsYTextBoxVariablesModificables(ri1);
+		}
+		/*en caso de recalcular metodo, ejecuto la funcion again*/
+		ri1.btnRecalcular.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				double[] d= new double[variablesModificables.length];
+				for(int i=0;i<variablesModificables.length;i++){
+					try{
+						if(i==0){
+							d[0] = Double.parseDouble(ri1.txtVariable1.getText());
+						}
+						else if(i==1){
+							d[1] = Double.parseDouble(ri1.txtVariable2.getText());
+						}
+						else if(i==2){
+							d[2] = Double.parseDouble(ri1.txtVariable3.getText());
+						}
+						else if(i==3){
+							d[3] = Double.parseDouble(ri1.txtVariable4.getText());
+						}
+					}
+					catch(Exception ex){
+						new AnalisisException("ENTRADA INVALIDA EN LA POSICION "+(i+1));
+						return;
+					}
+				}
+				ri1.setVisible(false);
+				mPadreU1.resetDatos();
+				ejecutarMetodoInterfaz(d);
+			}
+		});
+	}
+
+	private static void coordinarLabelsYTextBoxVariablesModificables(
+			ResultadosInterfaz1 ri1) {
+		switch(variablesModificables.length){
+		case 1:
+			ri1.lblVariable1.setText(TEXTOINICIO+variablesModificables[0]+TEXTOFIN);
+			ri1.lblVariable2.setVisible(false);
+			ri1.txtVariable2.setVisible(false);
+			ri1.lblVariable3.setVisible(false);
+			ri1.txtVariable3.setVisible(false);
+			ri1.lblVariable4.setVisible(false);
+			ri1.txtVariable4.setVisible(false);
+			break;
+		case 2:
+			ri1.lblVariable1.setText(TEXTOINICIO+variablesModificables[0]+TEXTOFIN);
+			ri1.lblVariable2.setText(TEXTOINICIO+variablesModificables[1]+TEXTOFIN);
+			ri1.lblVariable3.setVisible(false);
+			ri1.txtVariable3.setVisible(false);
+			ri1.lblVariable4.setVisible(false);
+			ri1.txtVariable4.setVisible(false);
+			break;
+		case 3:
+			ri1.lblVariable1.setText(TEXTOINICIO+variablesModificables[0]+TEXTOFIN);
+			ri1.lblVariable2.setText(TEXTOINICIO+variablesModificables[1]+TEXTOFIN);
+			ri1.lblVariable3.setText(TEXTOINICIO+variablesModificables[2]+TEXTOFIN);
+			ri1.lblVariable4.setVisible(false);
+			ri1.txtVariable4.setVisible(false);
+			break;
+		case 4:
+			ri1.lblVariable1.setText(TEXTOINICIO+variablesModificables[0]+TEXTOFIN);
+			ri1.lblVariable2.setText(TEXTOINICIO+variablesModificables[1]+TEXTOFIN);
+			ri1.lblVariable3.setText(TEXTOINICIO+variablesModificables[2]+TEXTOFIN);
+			ri1.lblVariable4.setText(TEXTOINICIO+variablesModificables[3]+TEXTOFIN);
+			break;
+
+		}
+	}
+
+	private static String generarTextoReferenciaUnidad() {
+		String salida = "";
+		if(MetodoUnidad1.getParserF()!=null){
+			salida+="f(x)= "+MetodoUnidad1.funcionF+"\n";
+		}
+		if(MetodoUnidad1.getParserG()!=null){
+			salida+="g(x)= "+MetodoUnidad1.funcionF+"\n";
+		}
+		if(MetodoUnidad1.getParserFdev()!=null){
+			salida+="f'(x)= "+MetodoUnidad1.funcionFdev+"\n";
+		}
+		if(MetodoUnidad1.getParserFdd()!=null){
+			salida+="f''(x)= "+MetodoUnidad1.funcionFdd+"\n";
+		}
+		return salida;
 	}
 
 }
