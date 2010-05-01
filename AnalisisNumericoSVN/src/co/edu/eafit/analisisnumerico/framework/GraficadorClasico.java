@@ -1,5 +1,7 @@
 package co.edu.eafit.analisisnumerico.framework;
 
+
+
 /**
  * @(#)GraficadorClasico
  * @author Walter Mora F/ITCR/2006

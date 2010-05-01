@@ -17,7 +17,7 @@ public class GestorInterfaz1 {
 	private static final String TEXTOFIN=":";
 	int numVariables=0;
 	int numFunciones=0;
-	
+	String[] nombresFunciones;
 	
 	public void otro()throws AnalisisException{
 		if(numVariables>5)throw new AnalisisException("The number of fields cannot be more than 5");
@@ -34,6 +34,7 @@ public class GestorInterfaz1 {
 	 */
 	public void pintar(int tipoMetodo, String titulo, int numFunciones, String funciones, String...strings) throws AnalisisException{
 		numVariables=strings.length;
+		nombresFunciones=funciones.split(",");
 		if((strings.length)>8)throw new AnalisisException("Esta interfaz solo permite un maximo de 8 entradas");
 		if(strings.length==0||strings==null)throw new AnalisisException("Debe ingresar como minimo una entrada");
 		coordinarLabelsYTextBox(strings);
@@ -64,14 +65,18 @@ public class GestorInterfaz1 {
 		resultados[2]=interfaz.txt3.getText();
 		resultados[3]=interfaz.txt4.getText();
 		resultados[4]=interfaz.txt5.getText();
-		resultados[5]=interfaz.txt6.getText();
+		resultados[5]=interfaz
+		.txt6.getText();
 		resultados[6]=interfaz.txt7.getText();
 		resultados[7]=interfaz.txt8.getText();
 		
 		for(int i=0;i<numVariables+numFunciones;i++){
 			if(i<numFunciones){
 				if(!GestorMetodos.esFuncionCorrecta(resultados[i]))throw new AnalisisException("Por favor escriba correctamente la funcion numero "+(i+1));
-				else valoresFunciones[i]=resultados[i];
+				else{
+					valoresFunciones[i]=resultados[i];
+					//GestorMetodos.textoReferencia+=nombresFunciones[i]+" = "+resultados[i];
+				}
 			}
 			else{
 				try{
@@ -87,7 +92,7 @@ public class GestorInterfaz1 {
 		for(int i=0;i<valores.size();i++){
 			resul[i]=valores.get(i);
 		}
-		GestorMetodos.ejecutarMetodo(resul);
+		GestorMetodos.ejecutarMetodoUnidad1(resul);
 	}
 
 	private void crearTitulo(String titulo) {

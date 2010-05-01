@@ -7,29 +7,29 @@ import javax.swing.JButton;
 
 import org.nfunk.jep.JEP;
 
-import co.edu.eafit.analisisnumerico.GUI.GUIPrincipal;
+import co.edu.eafit.analisisnumerico.GUI.GUIPrincipalUnidad1;
 
 /**
  * Clase principal. Inicia la aplicacion por modo grafico. gestiona eventos y validaciones
  * @author Sebastian
  *
  */
-public class Principal {
+public class PrincipalUnidad1 {
 	
 	/**Objeto principal para garantizar singleton*/
-	static Principal p;
+	static PrincipalUnidad1 p;
 	
 	
 	/** Objeto Interfaz Grafica*/
-	public GUIPrincipal gui;
+	public GUIPrincipalUnidad1 gui;
 	
 	/**
 	 * devuelve el objeto unico principal
 	 * @return Principal
 	 */
-	public static Principal getInstance(){
+	public static PrincipalUnidad1 getInstance(){
 		if(p==null){
-			p = new Principal();
+			p = new PrincipalUnidad1();
 		}
 		return p;
 	}
@@ -39,7 +39,8 @@ public class Principal {
 	 * Inicia la interfaz y genera los eventos
 	 */
 	public void iniciar(){
-		gui = new GUIPrincipal();
+		
+		gui = new GUIPrincipalUnidad1();
 		crearEventos();
 		gui.setVisible(true);
 	}
@@ -139,7 +140,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoUnidad1.setParserF(parser);
+				MetodoUnidad1.setParserF(parser, fx);
 				return true;
 			}
 		}
@@ -149,7 +150,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoUnidad1.setParserG(parser);
+				MetodoUnidad1.setParserG(parser, fx);
 				return true;
 			}
 		}
@@ -159,7 +160,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoUnidad1.setParserFdev(parser);
+				MetodoUnidad1.setParserFdev(parser, fx);
 				return true;
 			}
 		}
@@ -169,7 +170,7 @@ public class Principal {
 				return false;
 			}
 			else{
-				MetodoUnidad1.setParserFdd(parser);
+				MetodoUnidad1.setParserFdd(parser, fx);
 				return true;
 			}
 		}
@@ -180,7 +181,7 @@ public class Principal {
 	 * Crea eventos para un boton, de acuerdo al metodo que activa
 	 * @param boton boton para añadir evento
 	 * @param metodo metodo que lanzará el botón
-	 * TODO METODO NUEVO, PARA QUE FUNCIONE EN PRINCIPAL, DEBE ESTAR DEFINIDO AQUI
+	 * METODO NUEVO, PARA QUE FUNCIONE EN PRINCIPAL, DEBE ESTAR DEFINIDO AQUI
 	 */
 	public void crearEventoFuncion(JButton boton, final int metodo){
 		boton.addActionListener(new ActionListener() {
@@ -215,6 +216,6 @@ public class Principal {
 	}
 
 	public static void main(String[] args){
-		Principal.getInstance().iniciar();
+		PrincipalUnidad1.getInstance().iniciar();
 	}
 }
