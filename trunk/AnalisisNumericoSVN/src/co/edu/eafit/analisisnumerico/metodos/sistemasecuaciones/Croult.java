@@ -14,7 +14,7 @@ public class Croult extends MetodoUnidad2 implements SistemaEcuacionInterfaz {
 
 	 
 	public String metodoSistema(double... d) throws AnalisisException {
-			double[][] a = new double[matriz.length][matriz.length-1];
+			double[][] a = new double[matriz.length][matriz[0].length-1];
 			double[] b = new double[matriz.length];
 	        error = false;//booleano que permita controlar presencia de errores
 	        llenarLU(n); //metodo que llena la matriz u y la matriz l con sus respectivos datos
@@ -57,14 +57,14 @@ public class Croult extends MetodoUnidad2 implements SistemaEcuacionInterfaz {
 	                }
 	            }
 	        }
-	        
-        	DatoMatriz[][] lnueva = aumentarMatriz(l, b);
-            z=sustitucionProgresivaZ(lnueva); // Lz=b
-            DatoMatriz[][] unueva = aumentarMatriz2(u,z);
-            x=sustitucionRegresiva(unueva); //Ux=z
+        	double[][] lnueva = aumentarMatriz(l,b);
+        	double[] z=sustitucionProgresiva2(lnueva); // Lz=b
+        	double[][] unueva = aumentarMatriz(u,z);
+        	double[] x=sustitucionRegresiva2(unueva); //Ux=z
+            //para mostrar resultados
             //para mostrar resultados
             String[] col = new String[n];
-           // Impresion.mostrarResultadoLU(lnueva, unueva, solucionX, solucionZ, col, "Resultados Croult", n);
+            Impresion.mostrarResultadoLU(lnueva, unueva, x, z, col, "Resultados Dolytle", n);
             String resultado=imprimirResultadosMatrizTermino();
             return resultado;
 	    }
