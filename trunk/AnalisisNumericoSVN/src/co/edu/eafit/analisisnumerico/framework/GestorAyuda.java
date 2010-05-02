@@ -98,6 +98,24 @@ public class GestorAyuda {
 			case Constantes.SECANTE:
 				ruta+="Secante.txt";
 				break;
+			case Constantes.LUPIVOTEO:
+				ruta+="LUPivoteoParcial.txt";
+				break;
+			case Constantes.JACOBI:
+				ruta+="Jacobi.txt";
+				break;
+			case Constantes.GAUSSSEIDEL:
+				ruta+="GaussSeidel.txt";
+				break;
+			case Constantes.RELAJACION:
+				ruta+="Relajacion.txt";
+				break;
+			case Constantes.MATRIZBANDA:
+				ruta+="MatrizBanda.txt";
+				break;
+			case Constantes.INFOGENERAL:
+				ruta+="AcercaDe.txt";
+				break;
 		}
 		return readFile(ruta);
 	}

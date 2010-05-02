@@ -15,6 +15,9 @@ import co.edu.eafit.analisisnumerico.metodos.iterativos.PuntoFijo;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.RaicesMultiples;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.ReglaFalsa;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.Secante;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Cholesky;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Croult;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Dolytle;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.GaussSimple;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.LUSimple;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoEscalonado;
@@ -291,6 +294,9 @@ public class GestorMetodos {
 		if(metodo==Constantes.PIVOTEOTOTAL) return new PivoteoTotal(matriz);
 		if(metodo==Constantes.LUSIMPLE) return new LUSimple(matriz);
 		if(metodo==Constantes.PIVOTEOESCALONADO) return new PivoteoEscalonado(matriz);
+		if(metodo==Constantes.CROULT) return new Croult(matriz);
+		if(metodo==Constantes.CHOLESKY) return new Cholesky(matriz);
+		if(metodo==Constantes.DOOLITTLE) return new Dolytle(matriz);
 		return null;
 	}
 
