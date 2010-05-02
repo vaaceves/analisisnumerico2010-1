@@ -20,6 +20,7 @@ import java.awt.event.KeyListener;
 import javax.swing.table.DefaultTableModel;
 
 import co.edu.eafit.analisisnumerico.framework.Constantes;
+import co.edu.eafit.analisisnumerico.framework.GestorAyuda;
 import co.edu.eafit.analisisnumerico.framework.GestorInterfazPrincipalSistemasEcuaciones;
 
 /**
@@ -173,7 +174,7 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
         jgausseidel = new javax.swing.JMenuItem();
         jrealajacion = new javax.swing.JMenuItem();
         jmatrizbanda = new javax.swing.JMenuItem();
-        jinformaciongeneral = new javax.swing.JMenuItem();
+        
         jMenu3 = new javax.swing.JMenu();
         InfoGeneral = new javax.swing.JMenuItem();
 
@@ -522,14 +523,6 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
         });
         jMenu2.add(jmatrizbanda);
 
-        jinformaciongeneral.setText("Información General");
-        jinformaciongeneral.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jinformaciongeneralActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jinformaciongeneral);
-
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Acerca de");
@@ -631,63 +624,60 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
 }//GEN-LAST:event_btnPivoteoParcialActionPerformed
 
     private void jeliminacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeliminacionActionPerformed
-        // TODO add your handling code here:
+        GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.GAUSSSIMPLE);
 }//GEN-LAST:event_jeliminacionActionPerformed
 
     private void jsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jsalirActionPerformed
 
-    private void jinformaciongeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jinformaciongeneralActionPerformed
-        
-    }//GEN-LAST:event_jinformaciongeneralActionPerformed
 
     private void jpivoteoparcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpivoteoparcialActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.PIVOTEOPARCIAL);
     }//GEN-LAST:event_jpivoteoparcialActionPerformed
 
     private void jpivoteototalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpivoteototalActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.PIVOTEOTOTAL);
     }//GEN-LAST:event_jpivoteototalActionPerformed
 
     private void jgaussianaSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jgaussianaSimpleActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.LUSIMPLE);
     }//GEN-LAST:event_jgaussianaSimpleActionPerformed
 
     private void jgaussianaParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jgaussianaParcialActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.LUPIVOTEO);
     }//GEN-LAST:event_jgaussianaParcialActionPerformed
 
     private void jcholeskyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcholeskyActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.CHOLESKY);
     }//GEN-LAST:event_jcholeskyActionPerformed
 
     private void jcroultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcroultActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.CROULT);
     }//GEN-LAST:event_jcroultActionPerformed
 
     private void jdolytleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdolytleActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.DOOLITTLE);
     }//GEN-LAST:event_jdolytleActionPerformed
 
     private void jjacobiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jjacobiActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.JACOBI);
     }//GEN-LAST:event_jjacobiActionPerformed
 
     private void jgausseidelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jgausseidelActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.GAUSSSEIDEL);
     }//GEN-LAST:event_jgausseidelActionPerformed
 
     private void jrealajacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrealajacionActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.RELAJACION);
     }//GEN-LAST:event_jrealajacionActionPerformed
 
     private void jmatrizbandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmatrizbandaActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.MATRIZBANDA);
     }//GEN-LAST:event_jmatrizbandaActionPerformed
 
     private void InfoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoGeneralActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.INFOGENERAL);
 }//GEN-LAST:event_InfoGeneralActionPerformed
 
     /**
@@ -743,7 +733,6 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
     private javax.swing.JMenuItem jgausseidel;
     private javax.swing.JMenuItem jgaussianaParcial;
     private javax.swing.JMenuItem jgaussianaSimple;
-    private javax.swing.JMenuItem jinformaciongeneral;
     private javax.swing.JMenuItem jjacobi;
     private javax.swing.JMenuItem jmatrizbanda;
     private javax.swing.JMenuItem jpivoteoparcial;

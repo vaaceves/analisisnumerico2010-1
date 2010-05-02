@@ -216,7 +216,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Acerca de");
 
-        InfoGeneral.setText("InformaciÃ³n General ");
+        InfoGeneral.setText("Información General ");
         InfoGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InfoGeneralActionPerformed(evt);
