@@ -89,7 +89,25 @@ public class GestorInterfazPrincipalSistemasEcuaciones {
 				break;				
 			case Constantes.PIVOTEOESCALONADO:
 				GestorMetodos.ejecutarSistemaEcuacion(Constantes.PIVOTEOESCALONADO, "Pivoteo Escalonado", interfaz.getTabla());
-				break;				
+				break;		
+			case Constantes.LUPIVOTEO:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.LUPIVOTEO, "LU con Pivoteo Parcial", interfaz.getTabla());
+				break;
+			case Constantes.CHOLESKY:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.CHOLESKY, "Cholesky", interfaz.getTabla());
+				break;
+			case Constantes.CROULT:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.CROULT, "Croult", interfaz.getTabla());
+				break;
+			case Constantes.DOOLITTLE:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.DOOLITTLE, "Doolitle", interfaz.getTabla());
+				break;
+			case Constantes.JACOBI:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.JACOBI, "Jacobi", interfaz.getTabla());
+				break;
+			case Constantes.GAUSSSEIDEL:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.GAUSSSEIDEL, "Gauss Seidel", interfaz.getTabla());
+				break;
 		}
 	}
 
