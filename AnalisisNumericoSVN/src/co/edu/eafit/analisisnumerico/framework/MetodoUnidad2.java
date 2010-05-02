@@ -432,20 +432,46 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
                 u[i][j] = 0;
             }
         }
-    }
-    public DatoMatriz[][] aumentarMatriz(double[][] a, double[] b) {
+    }    public double[][] aumentarMatriz(double[][] a, double[] b) {
         int tam = n + 1;
-        DatoMatriz[][] aumentada = new DatoMatriz[n][tam];
+        double[][] aumentada = new double[n][tam];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                aumentada[i][j].setValor(a[i][j]);
+                aumentada[i][j] = a[i][j];
             }
         }
         for (int w = 0; w < n; w++) {
-            aumentada[w][n].setValor(b[w]);
+            aumentada[w][n] = b[w];
         }
         return aumentada;
     }
+
+    public double[] sustitucionProgresiva2(double[][] a) {
+    	double[] solucionZ = new double[n];
+        for (int k = 0; k < n; k++) {
+            double suma = 0;
+            for (int p = k-1; p >= 0; p--) {
+                suma = suma + (a[k][p] * solucionZ[p]);
+            }
+            solucionZ[k] = (a[k][n] - suma) / a[k][k];
+        }
+        //imprimirVectores(solucionZ, n);
+        return solucionZ;
+    }
+    
+    public double[] sustitucionRegresiva2(double[][] a) {
+    	double[] solucionX = new double[n];
+        for (int i = n - 1; i >= 0; i--) {
+            double acumulador = 0;
+            for (int p = i + 1; p < n; p++) {
+                acumulador = acumulador + (a[i][p] * solucionX[p]);
+            }
+            solucionX[i] = (a[i][n] - acumulador) / a[i][i];
+        }
+        //imprimirVectores(solucionX, n);
+        return solucionX;
+    }
+
     
     public DatoMatriz[][] aumentarMatriz2(double[][] a, Termino[] b) {
         int tam = n + 1;
