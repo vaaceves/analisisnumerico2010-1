@@ -14,6 +14,8 @@ package co.edu.eafit.analisisnumerico.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import co.edu.eafit.analisisnumerico.framework.Constantes;
+import co.edu.eafit.analisisnumerico.framework.GestorAyuda;
 import co.edu.eafit.analisisnumerico.framework.GestorInterfazPrincipal;
 
 /**
@@ -148,7 +150,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jMenu1.setText("Archivo");
-
+        
+        
         jsalir.setText("Salir");
         jsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +213,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.add(jecuacionesdiferenciales);
 
         jgraficador.setText("Graficador");
+        jgraficador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jgraficadorActionPerformed(evt);
+            }
+        });
+        
         jMenu2.add(jgraficador);
 
         jMenuBar1.add(jMenu2);
@@ -324,31 +333,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
 }//GEN-LAST:event_jsalirActionPerformed
 
     private void InfoGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoGeneralActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.INFOGENERAL);
 }//GEN-LAST:event_InfoGeneralActionPerformed
 
     private void jecuacionesdiferencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jecuacionesdiferencialesActionPerformed
-
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.ECUACIONESDIFERENCIALES);
 }//GEN-LAST:event_jecuacionesdiferencialesActionPerformed
 
     private void jintegracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jintegracionActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.INTEGRACION);
 }//GEN-LAST:event_jintegracionActionPerformed
 
     private void jdiferenciacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdiferenciacionActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.DIFERENCIACION);
 }//GEN-LAST:event_jdiferenciacionActionPerformed
 
     private void jinterpolacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jinterpolacionActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.INTERPOLACION);
 }//GEN-LAST:event_jinterpolacionActionPerformed
 
     private void jsistemasdeecuacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsistemasdeecuacionesActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.SISTEMASDEECUACIONES);
 }//GEN-LAST:event_jsistemasdeecuacionesActionPerformed
 
     private void jecuacionesnolinealesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jecuacionesnolinealesActionPerformed
-        // TODO add your handling code here:
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.ECUACIONESNOLINEALES);
+}//GEN-LAST:event_jecuacionesnolinealesActionPerformed
+
+    private void jgraficadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jecuacionesnolinealesActionPerformed
+    	GestorAyuda.getInstance().mostrarAyudaMetodo(Constantes.GRAFICADOR);
 }//GEN-LAST:event_jecuacionesnolinealesActionPerformed
 
     private void btnEcuacionesNolinealesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEcuacionesNolinealesActionPerformed
