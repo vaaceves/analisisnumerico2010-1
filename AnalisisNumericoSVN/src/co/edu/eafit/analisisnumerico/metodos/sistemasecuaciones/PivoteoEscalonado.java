@@ -37,8 +37,6 @@ public class PivoteoEscalonado extends MetodoUnidad2 implements SistemaEcuacionI
 				}
 			}
 		}
-		
-		
 		for(int k=0;k<n-1;k++){
 			double mayor = 0;
 			int row = k;
@@ -53,19 +51,25 @@ public class PivoteoEscalonado extends MetodoUnidad2 implements SistemaEcuacionI
 				}
 			}
 			if(mayor==0){
-				throw new AnalisisException("NO SE PUEDE REALIZAR EL METODO PUES EN LA ETAPA "+k+" EL MAYOR FUE 0");
+				 return "NO SE PUEDE REALIZAR EL METODO PUES EN LA ETAPA "+k+" EL MAYOR FUE 0";
 			}
 			if(row!=k){
-				System.out.println("INTERCAMBIANDO FILAS: "+row+", "+k);
 				intercambiarFilas(row,k);
 			}
 			
-			gaussEnEtapa(k);
-			imprimirCompleto(k, Constantes.PIVOTEOPARCIAL);
+			boolean ok = gaussEnEtapa(k);
+			if(!ok)return "division por cero en gauss. Etapa "+(k+1);
+			if(row!=k){
+				adicionarMatrizImpresion(matriz, "Etapa "+(k+1),"Intercambio filas "+(row+1)+","+(k+1));
+			}
+			else{
+				adicionarMatrizImpresion(matriz, "Etapa "+(k+1));
+			}
 		}
 		x=sustitucionRegresiva(matriz);
-		imprimirVector(x, "x");
-		return "";
+		if(x==null)return "Division por cero en uno de los elementos de la diagonal";
+		String resultado=imprimirResultadosMatrizTermino();
+		return resultado;
 	}
 	
 	

@@ -39,7 +39,7 @@ public class PivoteoTotal extends MetodoUnidad2 implements SistemaEcuacionInterf
 				}
 			}
 			if(mayor==0){
-				throw new AnalisisException("NO SE PUEDE REALIZAR EL METODO PUES EN LA ETAPA "+k+" EL MAYOR FUE 0");
+				 return "NO SE PUEDE REALIZAR EL METODO PUES EN LA ETAPA "+k+" EL MAYOR FUE 0";
 			}
 			if(column!=k){
 				System.out.println("INTERCAMBIANDO COLUMNAS: "+column+", "+k);
@@ -49,12 +49,19 @@ public class PivoteoTotal extends MetodoUnidad2 implements SistemaEcuacionInterf
 				System.out.println("INTERCAMBIANDO FILAS: "+row+", "+k);
 				intercambiarFilas(row,k);
 			}
-			gaussEnEtapa(k);
-			imprimirCompleto(k, Constantes.PIVOTEOPARCIAL);
+			boolean ok = gaussEnEtapa(k);
+			if(!ok) return "Division por cero en etapa "+(k+1);
+			if(row!=k||column!=k){
+				adicionarMatrizImpresion(matriz, "Etapa "+(k+1),"Nuevo pivote "+(row+1)+","+(column+1));
+			}
+			else{
+				adicionarMatrizImpresion(matriz, "Etapa "+(k+1));
+			}
 		}
 		x=sustitucionRegresiva(matriz);
 		imprimirVector(x, "x");
-		return "";
+		String resultado=imprimirResultadosMatrizTermino();
+		return resultado;
 	}
 	
 	
