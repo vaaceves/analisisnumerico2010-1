@@ -19,6 +19,7 @@ import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Cholesky;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Croult;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Dolytle;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.GaussSimple;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.LUParcial;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.LUSimple;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoEscalonado;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoParcial;
@@ -92,7 +93,7 @@ public class GestorMetodos {
 		try {
 			mp = GestorMetodos.fabricaMetodosUnidad2(numMetodo, matriz);
 		} catch (AnalisisException e1) {
-
+			return;
 		}
 		if(mp==null)return;
 		GestorMetodos.mPadreU2=mp;
@@ -293,10 +294,12 @@ public class GestorMetodos {
 		if(metodo==Constantes.PIVOTEOPARCIAL) return new PivoteoParcial(matriz);
 		if(metodo==Constantes.PIVOTEOTOTAL) return new PivoteoTotal(matriz);
 		if(metodo==Constantes.LUSIMPLE) return new LUSimple(matriz);
+		if(metodo==Constantes.LUPIVOTEO) return new LUParcial(matriz);
 		if(metodo==Constantes.PIVOTEOESCALONADO) return new PivoteoEscalonado(matriz);
 		if(metodo==Constantes.CROULT) return new Croult(matriz);
 		if(metodo==Constantes.CHOLESKY) return new Cholesky(matriz);
 		if(metodo==Constantes.DOOLITTLE) return new Dolytle(matriz);
+		new AnalisisException("ERROR DE PROGRAMACION: DEBE ADICIONAR EL METODO EN GESTOR METODOS: FABRICAMETODOS UNIDAD 2");
 		return null;
 	}
 

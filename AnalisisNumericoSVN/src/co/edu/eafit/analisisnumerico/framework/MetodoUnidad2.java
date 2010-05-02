@@ -9,6 +9,12 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	 * formato para las X 
 	 */
 	static private final DecimalFormat xFormat = new DecimalFormat("000.#####");
+	
+	
+	/**
+	 * formato para el proceso 
+	 */
+	static private final DecimalFormat procesoFormat = new DecimalFormat("###.##");
 
 	/**
 	 * Formato para los errores y funciones
@@ -60,10 +66,10 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	 * 
 	 * @param fila: la fila de resultado a añadir a la tabla
 	 */
-	public void adicionarMatrizImpresion(DatoMatriz[][] matriz, String... titulo){
+	public void adicionarMatrizImpresion(DatoMatriz[][] mimatriz, String... titulo){
 		if(datos==null){
 			datos = new Vector<Vector<String>>();
-			for(int i=0;i<matriz[0].length;i++){
+			for(int i=0;i<mimatriz[0].length;i++){
 				datos.add(new Vector<String>());
 			}
 		}
@@ -75,9 +81,9 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 			for(;i<datos.size();i++){
 				datos.get(i).add("");
 			}
-			for(int k=0;k<matriz.length;k++){
-				for(int j=0;j<matriz[0].length;j++){
-					datos.get(j).add(String.valueOf(matriz[k][j].getValor()));
+			for(int k=0;k<mimatriz.length;k++){
+				for(int j=0;j<mimatriz[0].length;j++){
+					datos.get(j).add(String.valueOf(procesoFormat(mimatriz[k][j].getValor())));
 				}
 			}
 		}catch(Exception e){
@@ -94,23 +100,37 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		}
 		try{
 			for(int i=0;i<resultado.length;i++){
-				datos.get(i).add(String.valueOf(resultado[i]));
+				datos.get(i).add(String.valueOf(procesoFormat(resultado[i])));
 
 			}
 		}catch(Exception e){
 			new AnalisisException("Error de programacion. Numero invalido de filas en la tabla de resultados");
 		}
 	}
-	//	public void imprimirMatriz(){
-	//		for(int i=0;i<datos.get(0).size();i++){
-	//			for(int j=0;j<datos.size();j++){
-	//				System.out.println(datos.get(i).get(j));
-	//			}
-	//			System.out.println();
-	//		}
-	//	}
-
-
+	
+	public void adicionarVectorTerminos(Termino[] x, String nombreVariable, String... titulo){
+		if(datos==null){
+			datos = new Vector<Vector<String>>();
+			for(int i=0;i<matriz[0].length;i++){
+				datos.add(new Vector<String>());
+			}
+		}
+		try{
+			int i=0;
+			for(i=0;i<titulo.length;i++){
+				datos.get(i).add(titulo[i]);
+			}
+			for(;i<datos.size();i++){
+				datos.get(i).add("");
+			}
+			for(int k=0;k<x.length;k++){
+				datos.get(k).add(nombreVariable+String.valueOf(x[k].getMarca()));
+				datos.get(k).add(String.valueOf(x[k].getValor()));
+			}
+		}catch(Exception e){
+			new AnalisisException("Error de programacion. Numero invalido de filas en la tabla de resultados");
+		}
+	}
 
 	public boolean addMultiplicador(int fila, int columna){
 		if(matriz[columna][columna].getValor()!=0){
@@ -215,7 +235,14 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		DatoMatriz[][] u = new DatoMatriz[matriz.length][matriz.length];
 		for(int i=0;i<matriz.length;i++){
 			for(int j=0;j<matriz.length;j++){
-				if(i>j)continue;
+				if(i>j){
+					DatoMatriz d = new DatoMatriz();
+					d.setFila(i);
+					d.setColumna(j);
+					d.setValor(0);
+					d.setMarca(j);
+					u[i][j]=d;
+				}
 				else u[i][j]=matriz[i][j];
 			}	
 		}
@@ -304,6 +331,10 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	public String xFormat(double valor){
 		return xFormat.format(valor);
 	}
+	
+	public String procesoFormat(double valor){
+		return procesoFormat.format(valor);
+	}
 
 	public String eFormat(double valor){
 		return eFormat.format(valor);
@@ -368,7 +399,7 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	public String imprimirResultadosMatrizTermino(){
 		String resultado="";
 		for(int i=0;i<x.length;i++){
-			resultado+= "X"+x[i].getMarca()+"="+x[i].getValor()+", ";
+			resultado+= "X"+x[i].getMarca()+"="+xFormat(x[i].getValor())+", ";
 		}
 		return resultado;
 	}
