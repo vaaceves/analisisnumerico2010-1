@@ -30,6 +30,14 @@ public final class Constantes {
 	public static final int RELAJACION=19;
 	public static final int MATRIZBANDA=20;
 	public static final int INFOGENERAL=21;
+	public static final int ECUACIONESNOLINEALES=22;
+	public static final int SISTEMASDEECUACIONES=23;
+	public static final int INTERPOLACION=24;
+	public static final int DIFERENCIACION=25;
+	public static final int INTEGRACION=26;
+	public static final int ECUACIONESDIFERENCIALES=27;
+	public static final int GRAFICADOR=28;
+	
 	
 	
 	
