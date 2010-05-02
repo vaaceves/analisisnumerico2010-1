@@ -116,6 +116,28 @@ public class GestorAyuda {
 			case Constantes.INFOGENERAL:
 				ruta+="AcercaDe.txt";
 				break;
+			case Constantes.ECUACIONESNOLINEALES:
+				ruta+="EcuacionesNoLineales.txt";
+				break;
+			case Constantes.SISTEMASDEECUACIONES:
+				ruta+="SistemasDeEcuaciones.txt";
+				break;
+			case Constantes.INTERPOLACION:
+				ruta+="Interpolacion.txt";
+				break;
+			case Constantes.DIFERENCIACION:
+				ruta+="Diferenciacion.txt";
+				break;
+			case Constantes.INTEGRACION:
+				ruta+="Integracion.txt";
+				break;
+			case Constantes.ECUACIONESDIFERENCIALES:
+				ruta+="EcuacionesDiferenciales.txt";
+				break;
+			case Constantes.GRAFICADOR:
+				ruta+="Graficador.txt";
+				break;
+			
 		}
 		return readFile(ruta);
 	}
@@ -184,6 +206,33 @@ public class GestorAyuda {
 				return textInicio+" PUNTO FIJO";
 			case Constantes.PIVOTEOTOTAL:
 				return textInicio+" PIVOTEO TOTAL";
+			case Constantes.LUPIVOTEO:
+				return textInicio+" LU PIVOTEO PARCIAL";
+			case Constantes.GAUSSSEIDEL:
+				return textInicio+" GAUSS SEIDEL";
+			case Constantes.JACOBI:
+				return textInicio+" JACOBI";
+			case Constantes.RELAJACION:
+				return textInicio+" RELAJACION";
+			case Constantes.MATRIZBANDA:
+				return textInicio+" MATRIZ BANDA";
+			case Constantes.INFOGENERAL:
+				return textInicio+" ACERCA DE";
+			case Constantes.ECUACIONESNOLINEALES:
+				return textInicio+" ECUACIONES NO LINEALES";
+			case Constantes.SISTEMASDEECUACIONES:
+				return textInicio+" SISTEMAS DE ECUACIONES";
+			case Constantes.INTERPOLACION:
+				return textInicio+" INTERPOLACION";
+			case Constantes.DIFERENCIACION:
+				return textInicio+" DIFERENCIACION";
+			case Constantes.INTEGRACION:
+				return textInicio+" INTEGRACION";
+			case Constantes.ECUACIONESDIFERENCIALES:
+				return textInicio+" ECUACIONES DIFERENCIALES";
+			case Constantes.GRAFICADOR:
+				return textInicio+" GRAFICADOR";
+				
 		}
 		return "";
 	}
