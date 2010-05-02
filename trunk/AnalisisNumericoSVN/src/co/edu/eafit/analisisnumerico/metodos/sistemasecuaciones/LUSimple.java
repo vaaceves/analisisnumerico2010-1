@@ -26,25 +26,22 @@ public class LUSimple extends MetodoUnidad2 implements SistemaEcuacionInterfaz {
 	@Override
 	public String metodoSistema(double... d) throws AnalisisException {
 		recortarMatriz();
-		boolean validacionCero=true;
 		String resultado="";
 		for(int k=0;k<n-1;k++){
-			validacionCero=gaussEnEtapa(k);
-			adicionarMatrizImpresion(matriz, "Matriz A en etapa "+k);
+			boolean ok=gaussEnEtapa(k);
+			if(!ok)return "division por cero en gauss";
 		}
 		DatoMatriz[][] 	u = getU();
 		DatoMatriz[][] l = getL();
+		adicionarMatrizImpresion(u, "Matriz U:");
+		adicionarMatrizImpresion(l, "Matriz L:");
 		l = concatenarTerminoIndependiente(l,b);
 		Termino[] z = sustitucionProgresiva(l);
+		adicionarVectorTerminos(z, "z", "Matriz Z");
 		u = concatenarTerminoIndependiente(u, z);
 		x = sustitucionRegresiva(u);
-		
-		if(validacionCero==true){
-			imprimirMatriz();
-			resultado=imprimirResultadosMatrizTermino();
-		}else{
-			resultado="Error: Division por cero hallando los multiplicadores";
-		}
+		if(x==null)resultado="Error: Division por cero hallando los multiplicadores";
+		resultado=imprimirResultadosMatrizTermino();
 		return resultado;
 	}
 }
