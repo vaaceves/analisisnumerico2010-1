@@ -29,7 +29,7 @@ public final class Constantes {
 	public static final int JACOBI=18;
 	public static final int RELAJACION=19;
 	public static final int MATRIZBANDA=20;
-	
+	public static final int INFOGENERAL=21;
 	
 	
 	

@@ -17,16 +17,21 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 
 	double[][] matrizMultiplicadores;
 	public Termino[] x;
+	public Termino[] z;
 	protected DatoMatriz[][] matriz;
 	public int n;
 	public DatoMatriz[] b;
 	public int[] m; //Vector de marcas necesario para LUParcial.
+	
+	public double[][] l;
+    public double[][] u;
 
 	public Vector<Vector<String>> datos;
 
 	public MetodoUnidad2(Object[][] valores) throws AnalisisException{
 		matriz= new DatoMatriz[valores.length][valores[0].length];
 		x= new Termino[valores.length];
+		z= new Termino[valores.length];
 		matrizMultiplicadores= new double[valores.length][valores.length];
 		n= matriz.length;
 		for(int i=0;i<matriz.length;i++){
@@ -187,6 +192,23 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 					/matriz[i][i].getValor());
 		}
 		return x;
+	}
+	
+	public Termino[] sustitucionProgresivaZ(DatoMatriz[][] matriz){
+		if(!validarDiagonal(matriz))return null;
+		Termino[] z= new Termino[this.z.length];
+		for(int i=0;i<n;i++){
+			double suma =0;
+			for(int j=i-1;j>=0;j--){
+				suma+=matriz[i][j].getValor()*z[j].getValor();
+			}
+			z[matriz[i][i].getMarca()] = new Termino();
+			z[matriz[i][i].getMarca()].setMarca(matriz[i][i].getMarca());
+			z[matriz[i][i].getMarca()].setValor((matriz[i][n].getValor()-suma)
+					/matriz[i][i].getValor());
+		}
+		return z;
+		
 	}
 
 	public DatoMatriz[][] getU(){
@@ -363,4 +385,49 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		}
 		return miMatriz;
 	}
+
+    public  void llenarLU(int n) {
+        l = new double[n][n];
+        u = new double[n][n];
+        //llenar l como una triangular inferior
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                l[i][j] = 0;
+            }
+        }
+        //llenar u como una triangular superior
+        for (int j = 0; j < n; j++) {
+            for (int i = j + 1; i < n; i++) {
+                u[i][j] = 0;
+            }
+        }
+    }
+    public DatoMatriz[][] aumentarMatriz(double[][] a, double[] b) {
+        int tam = n + 1;
+        DatoMatriz[][] aumentada = new DatoMatriz[n][tam];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                aumentada[i][j].setValor(a[i][j]);
+            }
+        }
+        for (int w = 0; w < n; w++) {
+            aumentada[w][n].setValor(b[w]);
+        }
+        return aumentada;
+    }
+    
+    public DatoMatriz[][] aumentarMatriz2(double[][] a, Termino[] b) {
+        int tam = n + 1;
+        DatoMatriz[][] aumentada = new DatoMatriz[n][tam];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                aumentada[i][j].setValor(a[i][j]);
+            }
+        }
+        for (int w = 0; w < n; w++) {
+            aumentada[w][n].setValor(b[w].getValor());
+        }
+        return aumentada;
+    }
+
 }
