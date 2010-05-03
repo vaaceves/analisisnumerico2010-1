@@ -44,7 +44,6 @@ public class Jacoby extends MetodoUnidad2 implements SistemaEcuacionInterfaz  {
 		}
 	}
 
-	@Override
 	public void metodoSistema() throws AnalisisException {
 		double tolerancia=UtilConsola.getTolerancia(5); //Tolerancia maxima
 		double cont = 0;
@@ -53,25 +52,21 @@ public class Jacoby extends MetodoUnidad2 implements SistemaEcuacionInterfaz  {
 		double suma; 
 		double ini [] = {1,1,1}; //Vector de valores iniciales
 		double respuesta[] = new double [ini.length];
+		double divisor=-1;
 
-		while (error>tolerancia&&cont<=iter)
+		while (error>tolerancia&&cont<=iter&&divisor!=0)
 		{
 			for (int i=0;i<n;i++)
 			{
+				divisor=matriz[i][i].getValor();
 				suma = 0;
 				for (int j=0;j<n;j++)
 				{
-					
-					//suma+=(matriz[i][j].getValor()*ini[j]);
 					if (i!=j)
 					{
 						suma+=(matriz[i][j].getValor()*ini[j]);
 					}
 				}
-//				for (int j=i+1;j<n;j++)
-//				{
-//					suma+=(matriz[i][j].getValor()*ini[j]);
-//				}
 				respuesta[i]=((b[i].getValor()-suma)/matriz[i][i].getValor());
 			}
 			
@@ -92,5 +87,10 @@ public class Jacoby extends MetodoUnidad2 implements SistemaEcuacionInterfaz  {
 		else if (cont>iter){
 			System.out.println("sobrepaso iteraciones");
 		}
+		else if (divisor==0)
+		{
+			System.out.println("Division por cero");
+		}
 	}
+
 }
