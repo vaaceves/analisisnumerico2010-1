@@ -52,11 +52,13 @@ public class GaussSeidel extends MetodoUnidad2 implements SistemaEcuacionInterfa
 		double suma; 
 		double ini [] = {1,1,1}; //Vector de valores iniciales
 		double respuesta[] = new double [ini.length];
+		double divisor=-1;
 
-		while (error>tolerancia&&cont<=iter)
+		while (error>tolerancia&&cont<=iter&&divisor!=0)
 		{
 			for (int i=0;i<n;i++)
 			{
+				divisor=matriz[i][i].getValor();
 				suma = 0;
 				for (int j=0;j<n;j++)
 				{
@@ -86,6 +88,10 @@ public class GaussSeidel extends MetodoUnidad2 implements SistemaEcuacionInterfa
 		}
 		else if (cont>iter){
 			System.out.println("sobrepaso iteraciones");
+		}
+		else if (divisor==0)
+		{
+			System.out.println("Division por cero");
 		}
 	}
 
