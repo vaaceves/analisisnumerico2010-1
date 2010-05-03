@@ -25,10 +25,12 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	public Termino[] x;
 	public Termino[] z;
 	protected DatoMatriz[][] matriz;
+	public DatoMatriz[][] matrizOriginal;
 	public int n;
 	public DatoMatriz[] b;
 	public int[] m; //Vector de marcas necesario para LUParcial.
 	
+	//variables para factorizacion directa matrices
 	public double[][] l;
     public double[][] u;
 
@@ -36,6 +38,7 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 
 	public MetodoUnidad2(Object[][] valores) throws AnalisisException{
 		matriz= new DatoMatriz[valores.length][valores[0].length];
+		matrizOriginal = new DatoMatriz[valores.length][valores[0].length];
 		x= new Termino[valores.length];
 		z= new Termino[valores.length];
 		matrizMultiplicadores= new double[valores.length][valores.length];
@@ -47,12 +50,16 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 				matriz[i][j].setFila(i);
 				matriz[i][j].setColumna(j);
 				matriz[i][j].setMarca(j);
+				matrizOriginal[i][j] = new DatoMatriz();
+				matrizOriginal[i][j].setFila(i);
+				matrizOriginal[i][j].setColumna(j);
+				matrizOriginal[i][j].setMarca(j);
 				try{
 					matriz[i][j].setValor(Double.parseDouble(valores[i][j].toString()));
+					matrizOriginal[i][j].setValor(Double.parseDouble(valores[i][j].toString()));
 				}catch(NumberFormatException ex){
 					throw new AnalisisException("VALOR INVALIDO EN LA POSICION "+i+","+j);
 				}
-
 			}
 		}
 		b= new DatoMatriz[valores.length];
@@ -91,22 +98,87 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		}
 	}
 
-	public void adicionarVectorImpresion(double[] resultado){
+	public void adicionarMatrizImpresion(double[][] mimatriz, String... titulo){
+		if(datos==null){
+			datos = new Vector<Vector<String>>();
+			for(int i=0;i<mimatriz[0].length;i++){
+				datos.add(new Vector<String>());
+			}
+		}
+		try{
+			int i=0;
+			for(i=0;i<titulo.length;i++){
+				datos.get(i).add(titulo[i]);
+			}
+			for(;i<datos.size();i++){
+				datos.get(i).add("");
+			}
+			for(int k=0;k<mimatriz.length;k++){
+				for(int j=0;j<mimatriz[0].length;j++){
+					datos.get(j).add(String.valueOf(procesoFormat(mimatriz[k][j])));
+				}
+			}
+		}catch(Exception e){
+			new AnalisisException("Error de programacion. Numero invalido de filas en la tabla de resultados");
+		}
+	}
+	
+	public void adicionarVectorImpresion(double[] resultado, String... titulos){
 		if(datos==null){
 			datos = new Vector<Vector<String>>();
 			for(int i=0;i<matriz[0].length;i++){
 				datos.add(new Vector<String>());
 			}
 		}
+		if(titulos!=null){
+			for(int i=0;i<titulos.length;i++){
+				datos.get(i).add(titulos[i]);
+			}
+		}
 		try{
-			for(int i=0;i<resultado.length;i++){
-				datos.get(i).add(String.valueOf(procesoFormat(resultado[i])));
+			int i=0;
+			for(;i<datos.size();i++){
+				if(i<resultado.length){
+					datos.get(i).add(String.valueOf(procesoFormat(resultado[i])));
+				}
+				else{
+					datos.get(i).add("");
+				}
+				
+			}
 
+		}catch(Exception e){
+			new AnalisisException("Error de programacion. Numero invalido de filas en la tabla de resultados");
+		}
+	}
+
+	public void adicionarVectorImpresion(double[] resultado, double error, String... titulos){
+		if(datos==null){
+			datos = new Vector<Vector<String>>();
+			for(int i=0;i<matriz[0].length;i++){
+				datos.add(new Vector<String>());
+			}
+		}
+		if(titulos!=null){
+			for(int i=0;i<titulos.length;i++){
+				datos.get(i).add(titulos[i]);
+			}
+		}
+		try{
+			int i=0;
+			for(;i<datos.size();i++){
+				if(i<resultado.length){
+					datos.get(i).add(String.valueOf(procesoFormat(resultado[i])));
+				}
+				else{
+					datos.get(i).add(String.valueOf(eFormat(error)));
+				}
 			}
 		}catch(Exception e){
 			new AnalisisException("Error de programacion. Numero invalido de filas en la tabla de resultados");
 		}
 	}
+
 	
 	public void adicionarVectorTerminos(Termino[] x, String nombreVariable, String... titulo){
 		if(datos==null){
@@ -132,6 +204,31 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		}
 	}
 
+	public void adicionarVectorTerminos(double[] x, String nombreVariable, String... titulo){
+		if(datos==null){
+			datos = new Vector<Vector<String>>();
+			for(int i=0;i<matriz[0].length;i++){
+				datos.add(new Vector<String>());
+			}
+		}
+		try{
+			int i=0;
+			for(i=0;i<titulo.length;i++){
+				datos.get(i).add(titulo[i]);
+			}
+			for(;i<datos.size();i++){
+				datos.get(i).add("");
+			}
+			for(int k=0;k<x.length;k++){
+				datos.get(k).add(nombreVariable+String.valueOf(k));
+				datos.get(k).add(String.valueOf(x[k]));
+			}
+		}catch(Exception e){
+			new AnalisisException("Error de programacion. Numero invalido de filas en la tabla de resultados");
+		}
+	}
+
+	
 	public boolean addMultiplicador(int fila, int columna){
 		if(matriz[columna][columna].getValor()!=0){
 			matrizMultiplicadores[fila][columna]= matriz[fila][columna].getValor()/
@@ -403,11 +500,18 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		}
 		return resultado;
 	}
+	
+	public String imprimirResultadosMatrizTermino(double[] xN){
+		String resultado="";
+		for(int i=0;i<xN.length;i++){
+			resultado+= "X"+(i+1)+"="+xFormat(xN[i])+", ";
+		}
+		return resultado;
+	}
 
 	public Object[][] generarMatrizSinTitulos(){
 		if(datos==null||datos.size()==0)return new Object[0][0];
 		Object[][] miMatriz = new Object[datos.get(0).size()][datos.size()];
-		DecimalFormat decimalFormat = new DecimalFormat("0.####E00");
 		//adiciono el resto
 		for(int i=0;i<miMatriz.length;i++){
 			for(int j=0;j<miMatriz[0].length;j++){
@@ -417,33 +521,33 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 		return miMatriz;
 	}
 
-    public  void llenarLU(int n) {
-        l = new double[n][n];
-        u = new double[n][n];
-        //llenar l como una triangular inferior
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
+    public  void inicializarMatricesLU(int tamano) {
+        l = new double[tamano][tamano];
+        u = new double[tamano][tamano];
+        for (int i = 0; i < tamano; i++) {
+            for (int j = i + 1; j < tamano; j++) {
                 l[i][j] = 0;
             }
         }
-        //llenar u como una triangular superior
-        for (int j = 0; j < n; j++) {
-            for (int i = j + 1; i < n; i++) {
+        for (int j = 0; j < tamano; j++) {
+            for (int i = j + 1; i < tamano; i++) {
                 u[i][j] = 0;
             }
         }
-    }    public double[][] aumentarMatriz(double[][] a, double[] b) {
+    }
+    
+    public double[][] adicionarColumna(double[][] a, double[] b) {
         int tam = n + 1;
-        double[][] aumentada = new double[n][tam];
+        double[][] nuevaMatriz = new double[n][tam];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                aumentada[i][j] = a[i][j];
+                nuevaMatriz[i][j] = a[i][j];
             }
         }
         for (int w = 0; w < n; w++) {
-            aumentada[w][n] = b[w];
+            nuevaMatriz[w][n] = b[w];
         }
-        return aumentada;
+        return nuevaMatriz;
     }
 
     public double[] sustitucionProgresiva2(double[][] a) {

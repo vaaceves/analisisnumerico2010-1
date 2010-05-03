@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 import co.edu.eafit.analisisnumerico.GUI.MetodoGUI1;
 import co.edu.eafit.analisisnumerico.GUI.MetodoGUI2;
+import co.edu.eafit.analisisnumerico.GUI.PopUpMISistemasEcuaciones;
 import co.edu.eafit.analisisnumerico.GUI.SistemasEcuacionesGUI;
 
 /**
@@ -103,10 +104,12 @@ public class GestorInterfazPrincipalSistemasEcuaciones {
 				GestorMetodos.ejecutarSistemaEcuacion(Constantes.DOOLITTLE, "Doolitle", interfaz.getTabla());
 				break;
 			case Constantes.JACOBI:
-				GestorMetodos.ejecutarSistemaEcuacion(Constantes.JACOBI, "Jacobi", interfaz.getTabla());
+				new PopUpMISistemasEcuaciones(this, Constantes.JACOBI, interfaz.getTabla());
+//				GestorMetodos.ejecutarSistemaEcuacion(Constantes.JACOBI, "Jacobi", interfaz.getTabla());
 				break;
 			case Constantes.GAUSSSEIDEL:
-				GestorMetodos.ejecutarSistemaEcuacion(Constantes.GAUSSSEIDEL, "Gauss Seidel", interfaz.getTabla());
+				new PopUpMISistemasEcuaciones(this, Constantes.GAUSSSEIDEL, interfaz.getTabla());
+//				GestorMetodos.ejecutarSistemaEcuacion(Constantes.GAUSSSEIDEL, "Gauss Seidel", interfaz.getTabla());
 				break;
 		}
 	}
