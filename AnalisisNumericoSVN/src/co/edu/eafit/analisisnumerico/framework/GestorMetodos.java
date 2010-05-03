@@ -18,7 +18,9 @@ import co.edu.eafit.analisisnumerico.metodos.iterativos.Secante;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Cholesky;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Croult;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Dolytle;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.GaussSeidel;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.GaussSimple;
+import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Jacoby;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.LUParcial;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.LUSimple;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoEscalonado;
@@ -88,7 +90,7 @@ public class GestorMetodos {
 		}
 	}
 
-	public static void ejecutarSistemaEcuacion(int numMetodo, String titulo, Object[][] matriz){
+	public static void ejecutarSistemaEcuacion(int numMetodo, String titulo, Object[][] matriz, double... valores){
 		MetodoUnidad2 mp = null;
 		try {
 			mp = GestorMetodos.fabricaMetodosUnidad2(numMetodo, matriz);
@@ -100,19 +102,37 @@ public class GestorMetodos {
 		String resultado="";
 		try {
 			/*ejecuta el metodo*/
-			resultado = mPadreU2.metodoSistema();
+			resultado = mPadreU2.metodoSistema(valores);
 		} catch (AnalisisException e) {
 			e.printStackTrace();
 		}
-		String[] titulos = new String[mp.datos.size()];
-		for(int i=0;i<titulos.length;i++)titulos[i]="";
-		
+		String[] titulos;
+		if(mp.datos!=null){
+			titulos = new String[mp.datos.size()];
+			for(int i=0;i<titulos.length;i++)titulos[i]="";	
+		}
+		else{
+			titulos = new String[1];
+			for(int i=0;i<titulos.length;i++)titulos[i]="";
+		}
 		/*MUESTRA LA INTERFAZ DE SALIDA*/
 		ResultadosInterfaz1 ri1= new ResultadosInterfaz1();
 		ri1.tablaResultados.setModel(new DefaultTableModel(mp.generarMatrizSinTitulos(), titulos));
-		ri1.txtDatosGenerales.setText(generarTextoReferenciaUnidad());
+		ri1.txtDatosGenerales.setText(generarMatrizEnString(mp.matrizOriginal));
 		ri1.lblResultado.setText("Resultado: "+resultado);
 		ri1.setVisible(true);
+	}
+
+	private static String generarMatrizEnString(DatoMatriz[][] matrizOriginal) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Matriz Original: \n");
+		for(int i=0;i<matrizOriginal.length;i++){
+			for(int j=0;j<matrizOriginal[0].length;j++){
+				buffer.append(matrizOriginal[i][j].getValor()+"\t");
+			}
+			buffer.append("\n");
+		}
+		return buffer.toString();
 	}
 
 	private static boolean validarFuncionesNecesarias() {
@@ -299,6 +319,8 @@ public class GestorMetodos {
 		if(metodo==Constantes.CROULT) return new Croult(matriz);
 		if(metodo==Constantes.CHOLESKY) return new Cholesky(matriz);
 		if(metodo==Constantes.DOOLITTLE) return new Dolytle(matriz);
+		if(metodo==Constantes.GAUSSSEIDEL) return new GaussSeidel(matriz);
+		if(metodo==Constantes.JACOBI) return new Jacoby(matriz);
 		new AnalisisException("ERROR DE PROGRAMACION: DEBE ADICIONAR EL METODO EN GESTOR METODOS: FABRICAMETODOS UNIDAD 2");
 		return null;
 	}
