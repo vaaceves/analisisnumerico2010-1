@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import co.edu.eafit.analisisnumerico.Video.MediaTest;
 import co.edu.eafit.analisisnumerico.framework.AnalisisException;
 import co.edu.eafit.analisisnumerico.framework.GestorAyuda;
 import co.edu.eafit.analisisnumerico.framework.PrincipalUnidad1;
@@ -40,7 +41,8 @@ public class MetodoGUI1 extends javax.swing.JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GestorAyuda.getInstance().mostrarAyudaMetodo();
+				//GestorAyuda.getInstance().mostrarAyudaMetodo();
+				MediaTest media=new MediaTest("ReglaFasa");
 			}
 		});
     }
