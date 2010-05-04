@@ -496,7 +496,7 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
 	public String imprimirResultadosMatrizTermino(){
 		String resultado="";
 		for(int i=0;i<x.length;i++){
-			resultado+= "X"+x[i].getMarca()+"="+xFormat(x[i].getValor())+", ";
+			resultado+= "X"+(+x[i].getMarca()+1)+"="+xFormat(x[i].getValor())+", ";
 		}
 		return resultado;
 	}
@@ -551,29 +551,27 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
     }
 
     public double[] sustitucionProgresiva2(double[][] a) {
-    	double[] solucionZ = new double[n];
+    	double[] resul = new double[n];
         for (int k = 0; k < n; k++) {
             double suma = 0;
             for (int p = k-1; p >= 0; p--) {
-                suma = suma + (a[k][p] * solucionZ[p]);
+                suma = suma + (a[k][p] * resul[p]);
             }
-            solucionZ[k] = (a[k][n] - suma) / a[k][k];
+            resul[k] = (a[k][n] - suma) / a[k][k];
         }
-        //imprimirVectores(solucionZ, n);
-        return solucionZ;
+        return resul;
     }
     
     public double[] sustitucionRegresiva2(double[][] a) {
-    	double[] solucionX = new double[n];
+    	double[] resul = new double[n];
         for (int i = n - 1; i >= 0; i--) {
             double acumulador = 0;
             for (int p = i + 1; p < n; p++) {
-                acumulador = acumulador + (a[i][p] * solucionX[p]);
+                acumulador = acumulador + (a[i][p] * resul[p]);
             }
-            solucionX[i] = (a[i][n] - acumulador) / a[i][i];
+            resul[i] = (a[i][n] - acumulador) / a[i][i];
         }
-        //imprimirVectores(solucionX, n);
-        return solucionX;
+        return resul;
     }
 
     
@@ -590,5 +588,10 @@ public abstract class MetodoUnidad2 implements SistemaEcuacionInterfaz{
         }
         return aumentada;
     }
+
+
+	public void resetDatos() {
+		datos=null;
+	}
 
 }
