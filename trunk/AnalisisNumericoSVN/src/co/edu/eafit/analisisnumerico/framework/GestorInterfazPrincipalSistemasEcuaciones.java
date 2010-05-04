@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import co.edu.eafit.analisisnumerico.GUI.MetodoGUI1;
 import co.edu.eafit.analisisnumerico.GUI.MetodoGUI2;
 import co.edu.eafit.analisisnumerico.GUI.PopUpMISistemasEcuaciones;
+import co.edu.eafit.analisisnumerico.GUI.PopUpRelajacion;
 import co.edu.eafit.analisisnumerico.GUI.SistemasEcuacionesGUI;
 
 /**
@@ -100,16 +101,31 @@ public class GestorInterfazPrincipalSistemasEcuaciones {
 			case Constantes.CROULT:
 				GestorMetodos.ejecutarSistemaEcuacion(Constantes.CROULT, "Croult", interfaz.getTabla());
 				break;
+			case Constantes.MATRIZBANDA:
+				GestorMetodos.ejecutarSistemaEcuacion(Constantes.MATRIZBANDA, "Matriz Banda", interfaz.getTabla());
+				break;
 			case Constantes.DOOLITTLE:
 				GestorMetodos.ejecutarSistemaEcuacion(Constantes.DOOLITTLE, "Doolitle", interfaz.getTabla());
 				break;
 			case Constantes.JACOBI:
+				if(!GestorMetodos.validarMatriz(interfaz.getTabla())){
+					return;
+				}
 				new PopUpMISistemasEcuaciones(this, Constantes.JACOBI, interfaz.getTabla());
 //				GestorMetodos.ejecutarSistemaEcuacion(Constantes.JACOBI, "Jacobi", interfaz.getTabla());
 				break;
 			case Constantes.GAUSSSEIDEL:
+				if(!GestorMetodos.validarMatriz(interfaz.getTabla())){
+					return;
+				}
 				new PopUpMISistemasEcuaciones(this, Constantes.GAUSSSEIDEL, interfaz.getTabla());
 //				GestorMetodos.ejecutarSistemaEcuacion(Constantes.GAUSSSEIDEL, "Gauss Seidel", interfaz.getTabla());
+				break;
+			case Constantes.RELAJACION:
+				if(!GestorMetodos.validarMatriz(interfaz.getTabla())){
+					return;
+				}
+				new PopUpRelajacion(this, Constantes.RELAJACION, interfaz.getTabla());
 				break;
 		}
 	}
