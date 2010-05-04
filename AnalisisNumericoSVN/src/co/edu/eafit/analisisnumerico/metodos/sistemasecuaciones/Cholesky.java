@@ -29,10 +29,10 @@ public class Cholesky extends MetodoUnidad2 implements SistemaEcuacionInterfaz {
 	            for (int p = 0; p < k; p++) {
 	                suma = suma + (l[k][p] * u[p][k]);
 	            }
-	            if (a[k][k] - suma > 0) {
+	            if (a[k][k] - suma >= 0) {
 	                l[k][k] = Math.sqrt(a[k][k] - suma);
 	            } else {
-	            	return "Error: Division por ceros";
+	            	return "Error: Raiz de un numero negativo";
 	            }
 	            u[k][k] = l[k][k];
 	            for (int i = k + 1; i < n; i++) {
