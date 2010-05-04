@@ -83,6 +83,7 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
         fnRaicesMultiples = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         
+        btnRegresar = new javax.swing.JButton();
         
         buttonGroup1 = new javax.swing.ButtonGroup();
         menuBar1 = new java.awt.MenuBar();
@@ -270,6 +271,13 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ayudas");
+        
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         jBusquedas.setText("Busquedas Incrementales");
         jBusquedas.addActionListener(new java.awt.event.ActionListener() {
@@ -394,6 +402,7 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnAyudas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnMetodos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                                    .addComponent(btnRegresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                                     .addComponent(btnGraficador, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))	
@@ -444,6 +453,8 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnMetodos)
                         .addGap(18, 18, 18)
+                        .addComponent(btnRegresar)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAyudas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -469,7 +480,7 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
 }
 
    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {
-       // TODO add your handling code here:
+    System.out.println("Deberia estar regresando de gui principal unidad uno");
    }
 
    private void btnAyudasActionPerformed(java.awt.event.ActionEvent evt) {
@@ -584,8 +595,11 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
+    
+
     // End of variables declaration
 	/**
+	 * 
 	 * @return the btnAyudas
 	 */
 	public javax.swing.JButton getBtnAyudas() {
