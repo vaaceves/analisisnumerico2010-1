@@ -245,8 +245,8 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
             .addGap(0, 124, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Sistemas de Ecuaciones", jPanel4);
-
+        //jTabbedPane1.addTab("Sistemas de Ecuaciones", jPanel4);
+        jPanel4.setVisible(false);
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -480,7 +480,7 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
 }
 
    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {
-    System.out.println("Deberia estar regresando de gui principal unidad uno");
+	  setVisible(false);
    }
 
    private void btnAyudasActionPerformed(java.awt.event.ActionEvent evt) {
