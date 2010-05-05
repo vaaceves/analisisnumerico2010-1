@@ -18,7 +18,7 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 		double cont = 0;
 		double error = tolerancia+1;
 		double iter =d[1]; //Numero de iteraciones maximas
-		double suma;
+		double suma;	
 		double ini [] = new double[d.length-3];
 		for(int i=3;i<d.length;i++){
 			ini[i-3]=d[i];
