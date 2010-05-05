@@ -11,40 +11,45 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 		super(matriz);
 	}
 
-	@Override
-	public String metodoSistema(double... d) throws AnalisisException {
-		//lambda = d[2]
+
+	public String metodoSistema(double...d) throws AnalisisException {
+		double lambda = d[2];
 		double tolerancia=UtilConsola.getTolerancia(d[0]); //Tolerancia maxima
 		double cont = 0;
 		double error = tolerancia+1;
 		double iter =d[1]; //Numero de iteraciones maximas
-		double suma; 
+		double suma;
 		double ini [] = new double[d.length-2];
-		for(int i=3;i<d.length;i++){
-			ini[i-3]=d[i];
+		for(int i=2;i<d.length;i++){
+			ini[i-2]=d[i];
 		}
 		double respuesta[] = new double [ini.length];
 		String resultado="";
-		while (error>tolerancia&&cont<=iter)
+		double divisor=-1;
+		while (error>tolerancia&&cont<=iter&&divisor!=0)
 		{
+			int aux=0;
 			for (int i=0;i<n;i++)
 			{
+				divisor=matriz[i][i].getValor();
+				if(divisor==0) break;
 				suma = 0;
 				for (int j=0;j<n;j++)
 				{
 					if (i!=j)
 					{
 						suma+=(matriz[i][j].getValor()*ini[j]);
+						aux=j;
 					}
 				}
-				if(matriz[i][i].getValor()==0){
-					return "Division por cero";
-				}
-				respuesta[i]=((b[i].getValor()-suma)/matriz[i][i].getValor());
-				
-				error=Math.max(Math.abs(respuesta[0]-ini[0]),Math.abs(respuesta[1]-ini[1])); //Error con la norma
-				error=Math.max(error,Math.abs(respuesta[2]-ini[2])); //Error con la norma
-				//System.out.println("Error: "+error);
+				respuesta[i]=((lambda*(b[i].getValor()-suma)/matriz[i][i].getValor())+((1-lambda)*ini[aux]));
+
+			}
+
+			error=Math.max(Math.abs(respuesta[0]-ini[0]),Math.abs(respuesta[1]-ini[1])); //Error con la norma
+			error=Math.max(error,Math.abs(respuesta[2]-ini[2])); //Error con la norma
+			for (int i=0;i<n;i++)
+			{
 				ini[i]=respuesta[i];
 			}
 			if(cont==0){
@@ -67,9 +72,11 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 		else if (cont>iter){
 			resultado="sobrepaso iteraciones";
 		}
+		else if (divisor==0)
+		{
+			return "Division por cero";
+		}
 		return resultado;
+
 	}
-
-
-
 }
