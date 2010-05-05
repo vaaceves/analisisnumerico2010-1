@@ -20,6 +20,7 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 		double iter =d[1]; //Numero de iteraciones maximas
 		double suma;	
 		double ini [] = new double[d.length-3];
+		double auxiliar[] = new double[d.length-3];
 		for(int i=3;i<d.length;i++){
 			ini[i-3]=d[i];
 		}
@@ -44,15 +45,16 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 					}
 				}
 				respuesta[i]=((lambda*((b[i].getValor()-suma)/matriz[i][i].getValor()))+((1-lambda)*ini[i]));
-
-			}
-
-			error=Math.max(Math.abs(respuesta[0]-ini[0]),Math.abs(respuesta[1]-ini[1])); //Error con la norma
-			error=Math.max(error,Math.abs(respuesta[2]-ini[2])); //Error con la norma
-			for (int i=0;i<n;i++)
-			{
+				auxiliar[i]=ini[i];
 				ini[i]=respuesta[i];
 			}
+
+			error=Math.max(Math.abs(respuesta[0]-auxiliar[0]),Math.abs(respuesta[1]-auxiliar[1])); //Error con la norma
+			error=Math.max(error,Math.abs(respuesta[2]-auxiliar[2])); //Error con la norma
+//			for (int i=0;i<n;i++)
+//			{
+//				ini[i]=respuesta[i];
+//			}
 			if(cont==0){
 				String[] titulos = new String[respuesta.length+1];
 				for(int i=0;i<titulos.length-1;i++){
