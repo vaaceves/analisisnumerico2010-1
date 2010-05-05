@@ -70,7 +70,7 @@ public class PopUpRelajacion extends javax.swing.JFrame {
     		resul[1] = Double.parseDouble(txtIter.getText());
     		resul[2] = Double.parseDouble(txtLambda.getText());
     		for(int i=0;i<tamano;i++){
-    			resul[i+2]=Double.parseDouble(tblValoresIniciales.getValueAt(0, i).toString());
+    			resul[i+3]=Double.parseDouble(tblValoresIniciales.getValueAt(0, i).toString());
     		}
     		return resul;
     	}
