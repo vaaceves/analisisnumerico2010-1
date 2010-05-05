@@ -13,7 +13,7 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 
 
 	public String metodoSistema(double...d) throws AnalisisException {
-		double lambda = d[2];
+		double lambda =d[2];
 		double tolerancia=UtilConsola.getTolerancia(d[0]); //Tolerancia maxima
 		double cont = 0;
 		double error = tolerancia+1;
@@ -28,9 +28,10 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 		double divisor=-1;
 		while (error>tolerancia&&cont<=iter&&divisor!=0)
 		{
-			int aux=0;
+			
 			for (int i=0;i<n;i++)
 			{
+				
 				divisor=matriz[i][i].getValor();
 				if(divisor==0) break;
 				suma = 0;
@@ -39,10 +40,10 @@ public class Relajacion extends MetodoUnidad2 implements SistemaEcuacionInterfaz
 					if (i!=j)
 					{
 						suma+=(matriz[i][j].getValor()*ini[j]);
-						aux=j;
+						
 					}
 				}
-				respuesta[i]=((lambda*(b[i].getValor()-suma)/matriz[i][i].getValor())+((1-lambda)*ini[aux]));
+				respuesta[i]=((lambda*((b[i].getValor()-suma)/matriz[i][i].getValor()))+((1-lambda)*ini[i]));
 
 			}
 
