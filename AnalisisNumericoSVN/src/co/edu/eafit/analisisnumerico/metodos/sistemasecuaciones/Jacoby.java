@@ -19,6 +19,7 @@ public class Jacoby extends MetodoUnidad2 implements SistemaEcuacionInterfaz  {
 		double error = tolerancia+1;
 		double iter =d[1]; //Numero de iteraciones maximas
 		double suma;
+		double error_inmediato;
 		double ini [] = new double[d.length-2];
 		for(int i=2;i<d.length;i++){
 			ini[i-2]=d[i];
@@ -28,6 +29,7 @@ public class Jacoby extends MetodoUnidad2 implements SistemaEcuacionInterfaz  {
 		double divisor=-1;
 		while (error>tolerancia&&cont<=iter&&divisor!=0)
 		{
+			error=0
 			for (int i=0;i<n;i++)
 			{
 				divisor=matriz[i][i].getValor();
@@ -41,11 +43,11 @@ public class Jacoby extends MetodoUnidad2 implements SistemaEcuacionInterfaz  {
 					}
 				}
 				respuesta[i]=((b[i].getValor()-suma)/matriz[i][i].getValor());
+				error_inmediato=Math.abs(respuesta[i]-ini[i]);
+				error=Math.max(error, error_inmediato);
 
 			}
 
-			error=Math.max(Math.abs(respuesta[0]-ini[0]),Math.abs(respuesta[1]-ini[1])); //Error con la norma
-			error=Math.max(error,Math.abs(respuesta[2]-ini[2])); //Error con la norma
 			for (int i=0;i<n;i++)
 			{
 				ini[i]=respuesta[i];
