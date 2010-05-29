@@ -38,6 +38,7 @@ public class GraficadorClasico extends JFrame{
     JButton BtnAyuda;
     JButton BtnGraficar;
     JButton BtnLimpiar;
+    JButton BtnRegresar;
     JFrame fFrame; //ventana de ayuda
     int Galto,Gancho; //dimesiones de la zona de graficaci�n
     double xmin,xmax,imgx;
@@ -82,6 +83,7 @@ public class GraficadorClasico extends JFrame{
         BtnAyuda = new JButton("Ayuda");
         BtnGraficar= new JButton("Graficar");
         BtnLimpiar= new JButton("Limpiar");
+        BtnRegresar= new JButton("Regresar");
         c.gridy = 1; // fila
         c.gridx = 0; // columna
         ControlPanel.add(BtnAyuda, c);
@@ -91,6 +93,9 @@ public class GraficadorClasico extends JFrame{
         c.gridy = 3; // fila
         c.gridx = 0; // columna
         ControlPanel.add(BtnLimpiar, c);
+        c.gridy = 4; // fila
+        c.gridx = 0; // columna
+        ControlPanel.add(BtnRegresar, c);
         
         //fin del administrador de dise�o ControlPanel
         
@@ -145,6 +150,7 @@ public class GraficadorClasico extends JFrame{
         BtnAyuda.addActionListener(new  ManejadorDeEvento());
         BtnGraficar.addActionListener(new  ManejadorDeEvento2());
         BtnLimpiar.addActionListener(new  ManejadorDeEvento3());
+        BtnRegresar.addActionListener(new  ManejadorDeEvento4());
     }
     
     private class ManejadorDeEvento implements ActionListener {
@@ -171,6 +177,15 @@ public class GraficadorClasico extends JFrame{
             if(source == BtnLimpiar) {
             	GraficadorClasico.limpi=true;
             	ZG.repaint();
+            }
+        }
+    }
+    
+    private class ManejadorDeEvento4 implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            Object source = evt.getSource();
+            if(source == BtnRegresar) {
+            	GraficadorClasico.this.setVisible(false);
             }
         }
     }
