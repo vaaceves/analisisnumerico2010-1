@@ -35,6 +35,7 @@ public class SistemasEcuacionesGUI extends javax.swing.JFrame {
     /** Creates new form SistemasEcuacionesGUI */
     public SistemasEcuacionesGUI() {
         initComponents();
+        setResizable(false);
 this.txtTamanoMatriz.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -133,6 +134,8 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        
+        btnAyuda = new javax.swing.JButton();
         lblTamanoMatriz = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         txtTamanoMatriz = new javax.swing.JTextField();
@@ -198,6 +201,9 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
 
         btnRegresar.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         btnRegresar.setText("Regresar");
+        
+        btnAyuda.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        btnAyuda.setText("Ayuda");
 
         lblTamanoMatriz.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         lblTamanoMatriz.setText("Tamaño de la matriz");
@@ -561,9 +567,12 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblTamanoMatriz)
                                     .addComponent(jSeparator4)))
+                                .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(btnAyuda,javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
-                                .addComponent(btnRegresar))))
+                                .addComponent(btnRegresar,javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -590,7 +599,9 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
                         .addComponent(jLabel2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(169, 169, 169)
+                            	.addGap(169, 169, 169)
+                                .addComponent(btnAyuda)
+                                .addGap(20, 20, 20)
                                 .addComponent(btnRegresar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -705,6 +716,8 @@ this.txtTamanoMatriz.addKeyListener(new KeyListener() {
     private javax.swing.JButton btnPivoteoParcial;
     private javax.swing.JButton btnPivoteoTotal;
     private javax.swing.JButton btnRegresar;
+    
+    private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnRelajacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
