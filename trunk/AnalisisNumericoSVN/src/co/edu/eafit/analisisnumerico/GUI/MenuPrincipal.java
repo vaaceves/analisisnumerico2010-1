@@ -27,6 +27,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /** Creates new form MenuPrincipal */
     public MenuPrincipal() {
         initComponents();
+        btnSplines.setVisible(false);
         btnEcuacionesNolineales.addActionListener(new ActionListener() {
 			
 			@Override
@@ -69,7 +70,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnInterpolacion = new javax.swing.JButton();
         btnDiferenciacion = new javax.swing.JButton();
         btnIntegracion = new javax.swing.JButton();
-        btnEcuacionesDiferenciales = new javax.swing.JButton();
+        btnSplines = new javax.swing.JButton();
         btnGraficador = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -133,11 +134,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnEcuacionesDiferenciales.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        btnEcuacionesDiferenciales.setText("Ecuaciones Diferenciales");
-        btnEcuacionesDiferenciales.addActionListener(new java.awt.event.ActionListener() {
+        btnSplines.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        btnSplines.setText("Splines");
+        btnSplines.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEcuacionesDiferencialesActionPerformed(evt);
+                btnSplinesActionPerformed(evt);
             }
         });
 
@@ -253,13 +254,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addGroup(panelFondoLayout.createSequentialGroup()
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnInterpolacion,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnGraficador,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    //.addComponent(btnGraficador,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(btnEcuacionesNolineales,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnSistemasdeEcuaciones,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(37, 37, 37)
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEcuacionesDiferenciales,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnGraficador,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnIntegracion,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnDiferenciacion,javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(83, 83, 83)))
@@ -283,9 +284,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInterpolacion)
-                    .addComponent(btnEcuacionesDiferenciales))
+                    .addComponent(btnGraficador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGraficador)
+               // .addComponent(btnGraficador)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         
@@ -384,9 +385,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 }//GEN-LAST:event_btnIntegracionActionPerformed
 
-    private void btnEcuacionesDiferencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEcuacionesDiferencialesActionPerformed
+    private void btnSplinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSplinesActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_btnEcuacionesDiferencialesActionPerformed
+}//GEN-LAST:event_btnSplinesActionPerformed
 
     private void btnGraficadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficadorActionPerformed
         // TODO add your handling code here:
@@ -406,7 +407,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem InfoGeneral;
     private javax.swing.JButton btnDiferenciacion;
-    private javax.swing.JButton btnEcuacionesDiferenciales;
+    private javax.swing.JButton btnSplines;
     private javax.swing.JButton btnEcuacionesNolineales;
     private javax.swing.JButton btnGraficador;
     private javax.swing.JButton btnIntegracion;
