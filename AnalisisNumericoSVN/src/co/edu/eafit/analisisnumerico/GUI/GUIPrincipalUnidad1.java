@@ -33,7 +33,7 @@ public class GUIPrincipalUnidad1 extends javax.swing.JFrame {
         initComponents();
         jTabbedPane1.setVisible(false);
         jLabel13.setVisible(false);
-        btnAyudas.setVisible(false);
+        btnAyudas.setVisible(true);
         btnGraficador.setVisible(false);
     }
 
