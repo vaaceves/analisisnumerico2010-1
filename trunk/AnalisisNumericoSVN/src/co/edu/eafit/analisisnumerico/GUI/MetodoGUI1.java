@@ -18,6 +18,7 @@ import java.awt.event.WindowListener;
 
 import co.edu.eafit.analisisnumerico.Video.MediaTest;
 import co.edu.eafit.analisisnumerico.framework.AnalisisException;
+import co.edu.eafit.analisisnumerico.framework.Constantes;
 import co.edu.eafit.analisisnumerico.framework.GestorAyuda;
 import co.edu.eafit.analisisnumerico.framework.PrincipalUnidad1;
 
@@ -42,7 +43,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//GestorAyuda.getInstance().mostrarAyudaMetodo();
-				MediaTest media=new MediaTest("ReglaFasa");
+				MediaTest media=new MediaTest("file:\\C:\\Users\\Sebastian\\workspace\\AnalisisNumericoSVN\\src\\co\\edu\\eafit\\analisisnumerico\\Video\\bailey.mpg");
 			}
 		});
     }
@@ -79,7 +80,7 @@ public class MetodoGUI1 extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         lblFinal = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         lbl1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbl1.setText("Ingrese");

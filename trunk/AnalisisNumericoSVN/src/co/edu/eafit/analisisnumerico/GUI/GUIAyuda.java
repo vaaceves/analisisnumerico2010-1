@@ -14,6 +14,8 @@ package co.edu.eafit.analisisnumerico.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import co.edu.eafit.analisisnumerico.framework.Constantes;
+
 /**
  *
  * @author nico
@@ -61,7 +63,7 @@ public class GUIAyuda extends javax.swing.JFrame {
         btnRegresar.setActionCommand("Regresar");
         btnRegresar.setLabel("Regresar");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/eafit/analisisnumerico/GUI/logo2.JPG"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.RUTAIMAGEN))); // NOI18N
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
