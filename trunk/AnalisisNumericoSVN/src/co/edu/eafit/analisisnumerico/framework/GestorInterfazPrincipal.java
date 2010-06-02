@@ -34,9 +34,24 @@ public class GestorInterfazPrincipal {
 	public static void iniciarSistemasEcuaciones(){
 		GestorInterfazPrincipalSistemasEcuaciones.getInstance().iniciar();
 	}
+	
+	/**inicia la interfaz y el objeto de logica de la unidad 3*/
+	public static void iniciarInterpolacion(){
+		GestorInterfazPrincipalInterpolacion.getInstance().iniciar();
+	}
+	
+	/**inicia la interfaz y el objeto de logica de diferenciacion*/
+	public static void iniciarDiferenciacion(){
+		GestorInterfazPrincipalDiferenciacion.getInstance().iniciar();
+	} 
 
 	public static void iniciarGraficador() {
 		GraficadorClasico graficador = new GraficadorClasico();
 		graficador.setVisible(true);
+	}
+
+	public static void iniciarIntegracion() {
+		GestorInterfazPrincipalIntegracion.getInstance().iniciar();
+		
 	}
 }
