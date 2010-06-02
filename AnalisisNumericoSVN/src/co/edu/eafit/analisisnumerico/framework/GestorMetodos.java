@@ -1,13 +1,33 @@
 package co.edu.eafit.analisisnumerico.framework;
 
 
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 import org.nfunk.jep.JEP;
 
 import co.edu.eafit.analisisnumerico.GUI.ResultadosInterfaz1;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.cincopuntos.DiferenciacionCincoPuntosCentrada;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.cincopuntos.DiferenciacionCincoPuntosProgresiva;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.cincopuntos.DiferenciacionCincoPuntosRegresiva;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.dospuntos.DiferenciacionDosPuntosProgresiva;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.dospuntos.DiferenciacionDosPuntosRegresiva;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.trespuntos.DiferenciacionTresPuntosCentrada;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.trespuntos.DiferenciacionTresPuntosProgresiva;
+import co.edu.eafit.analisisnumerico.metodos.diferenciacion.trespuntos.DiferenciacionTresPuntosRegresiva;
+import co.edu.eafit.analisisnumerico.metodos.integracion.SimpsonTresOctavos;
+import co.edu.eafit.analisisnumerico.metodos.integracion.SimpsonUnTercio;
+import co.edu.eafit.analisisnumerico.metodos.integracion.SimpsonUnTercioGeneralizado;
+import co.edu.eafit.analisisnumerico.metodos.integracion.TrapecioGeneralizado;
+import co.edu.eafit.analisisnumerico.metodos.integracion.TrapecioSencillo;
+import co.edu.eafit.analisisnumerico.metodos.interpolacion.Lagrange;
+import co.edu.eafit.analisisnumerico.metodos.interpolacion.Neville;
+import co.edu.eafit.analisisnumerico.metodos.interpolacion.NewtonDiferenciasDivididas;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.Biseccion;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.BusquedasIncrementales;
 import co.edu.eafit.analisisnumerico.metodos.iterativos.Newton;
@@ -30,13 +50,14 @@ import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.PivoteoTotal;
 import co.edu.eafit.analisisnumerico.metodos.sistemasecuaciones.Relajacion;
 
 /**
- * Clase Gestor Metodos. Posee la fabrica de metodos y la ejecucion dinamica de los mismos
+ * Clase Gestor Metodos. Posee la fabrica de metodos y la ejecucion dinamica de los mismos para todas las unidades
  * @author Sebastian
  *
  */
 public class GestorMetodos {
 	static MetodoUnidad1 mPadreU1;
 	static MetodoUnidad2 mPadreU2;
+	static MetodoUnidad3 mPadreU3;
 	private static String funciones;
 	private static int modo;
 	private static final String TEXTOINICIO="";
@@ -90,6 +111,137 @@ public class GestorMetodos {
 			}
 
 		}
+	}
+
+	public static void ejecutarIntegracion(int metodo, JEP parser,
+			double delta, double limiteInferior, double limiteSuperior,
+			int particiones, TextArea campoResultado) {
+		MetodoUnidad5 mp = null;
+		mp = GestorMetodos.fabricaMetodosUnidad5(metodo);
+		mp.inicializarParser(parser); 
+		String resultado ="";
+		DecimalFormat resulFormat = new DecimalFormat("###.####");
+		try {
+			resultado = "Resultado de la diferenciación:" + 
+				resulFormat.format(
+						mp.metodoIntegracion(delta, limiteInferior, limiteSuperior, particiones));
+		} catch (AnalisisException e) {
+			e.printStackTrace();
+			return;
+		}
+		campoResultado.setText(resultado);
+	}
+
+	public static void ejecutarDiferenciacion(int metodo, JEP parser,
+			double delta, double valor, TextArea campoResultado) {
+		MetodoUnidad4 mp = null;
+		mp = GestorMetodos.fabricaMetodosUnidad4(metodo);
+		mp.inicializarParser(parser);
+		String resultado ="";
+		DecimalFormat resulFormat = new DecimalFormat("###.####");
+		try {
+			resultado = "Resultado de la diferenciación para "+valor
+							+"\ncon un delta de "+delta+"\n = "+resulFormat.format(mp.metodoDiferenciacion(valor, delta));
+		} catch (AnalisisException e) {
+			e.printStackTrace();
+			return;
+		}
+		campoResultado.setText(resultado);
+	}
+
+	public static void ejecutarInterpolacion(final int numMetodo, final String titulo, final double[][] matriz, final double valorAInterpolar){
+		MetodoUnidad3 mp = null;
+		mp = GestorMetodos.fabricaMetodosUnidad3(numMetodo);
+		if(mp==null)return;
+		GestorMetodos.mPadreU3=mp;
+		String resultado="";
+		try {
+			//ejecuta el metodo
+			resultado = mp.metodoInterpolacion(matriz,valorAInterpolar);
+		} catch (AnalisisException e) {}
+		String[] titulos;
+		if(mp.datos!=null){
+			titulos = new String[mp.datos.size()];
+			for(int i=0;i<titulos.length;i++)titulos[i]="";	
+		}
+		else{
+			titulos = new String[mp.matrizResultado[0].length];
+			for(int i=0;i<titulos.length;i++)titulos[i]="";
+		}
+		/*MUESTRA LA INTERFAZ DE SALIDA*/
+		final ResultadosInterfaz1 ri1= new ResultadosInterfaz1();
+		ri1.tablaResultados.setModel(new DefaultTableModel(mp.generarMatrizString(), titulos));
+		ri1.txtDatosGenerales.setText(generarValoresEnString(matriz));
+		ri1.lblResultado.setText("Resultado: "+resultado);
+		ri1.lblVariable2.setVisible(false);
+		ri1.lblVariable3.setVisible(false);
+		ri1.lblVariable4.setVisible(false);
+		ri1.txtVariable2.setVisible(false);
+		ri1.txtVariable3.setVisible(false);
+		ri1.txtVariable4.setVisible(false);
+		ri1.jScrollPane3.setVisible(false);
+		ri1.tblB.setVisible(false);
+		ri1.lblVectorB.setVisible(false);
+		ri1.lblVariable1.setText("Valor a interpolar:");
+		ri1.btnRecalcular.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				double nuevoValorAInterpolar;
+				try{
+				nuevoValorAInterpolar=Double.parseDouble(ri1.txtVariable1.getText());	
+				}
+				catch(Exception e){
+					new AnalisisException("Valor inválido");
+					return;
+				}
+				ri1.setVisible(false);
+				mPadreU3.resetDatos();
+				ejecutarInterpolacion(numMetodo, titulo, matriz, nuevoValorAInterpolar);
+			}	
+		});
+
+		ri1.setVisible(true);
+	}
+	
+	
+	private static String generarValoresEnString(double[][] matriz) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Valores dados: \n");
+		for(int i=0;i<matriz.length;i++){
+			buffer.append("f("+matriz[i][0]+") = "+matriz[i][1]);
+			buffer.append("\n");
+		}
+		return buffer.toString();
+	}
+
+	private static MetodoUnidad5 fabricaMetodosUnidad5(int metodo) {
+		if(metodo==Constantes.SIMPSONTRESOCTAVOS)return new SimpsonTresOctavos();
+		if(metodo==Constantes.SIMPSONUNTERCIO)return new SimpsonUnTercio();
+		if(metodo==Constantes.SIMPSONUNTERCIOGENERALIZADO)return new SimpsonUnTercioGeneralizado();
+		if(metodo==Constantes.TRAPECIOSENCILLO)return new TrapecioSencillo();
+		if(metodo==Constantes.TRAPECIOGENERALIZADO)return new TrapecioGeneralizado();
+		return null;
+	}
+	
+	private static MetodoUnidad4 fabricaMetodosUnidad4(int metodo) {
+		if(metodo==Constantes.DIFERENCIACION2PTOSPROGRESIVA)return new DiferenciacionDosPuntosProgresiva();
+		if(metodo==Constantes.DIFERENCIACION2PTOSREGRESIVA)return new DiferenciacionDosPuntosRegresiva();
+		if(metodo==Constantes.DIFERENCIACION3PTOSCENTRADA)return new DiferenciacionTresPuntosCentrada();
+		if(metodo==Constantes.DIFERENCIACION3PTOSPROGRESIVA)return new DiferenciacionTresPuntosProgresiva();
+		if(metodo==Constantes.DIFERENCIACION3PTOSREGRESIVA)return new DiferenciacionTresPuntosRegresiva();
+		if(metodo==Constantes.DIFERENCIACION5PTOSCENTRADA)return new DiferenciacionCincoPuntosCentrada();
+		if(metodo==Constantes.DIFERENCIACION5PTOSPROGRESIVA)return new DiferenciacionCincoPuntosProgresiva();
+		if(metodo==Constantes.DIFERENCIACION5PTOSREGRESIVA)return new DiferenciacionCincoPuntosRegresiva();
+		return null;
+	}
+	
+	private static MetodoUnidad3 fabricaMetodosUnidad3(int metodo) {
+		if(metodo==Constantes.NEWTONDIFERENCIASDIVIDIDAS) return new NewtonDiferenciasDivididas();
+		if(metodo==Constantes.LAGRANGE) return new Lagrange();
+		if(metodo==Constantes.NEVILLE) return new Neville();
+		new AnalisisException("ERROR DE PROGRAMACION: DEBE ADICIONAR EL METODO EN GESTOR METODOS: FABRICAMETODOS UNIDAD 3");
+		return null;
 	}
 
 	public static void ejecutarSistemaEcuacion(final int numMetodo, final String titulo, final Object[][] matriz, final double... valores){
@@ -252,6 +404,18 @@ public class GestorMetodos {
 		for(int i=0;i<matrizOriginal.length;i++){
 			for(int j=0;j<matrizOriginal[0].length;j++){
 				buffer.append(matrizOriginal[i][j].getValor()+"\t");
+			}
+			buffer.append("\n");
+		}
+		return buffer.toString();
+	}
+	
+	private static String generarMatrizEnString(double[][] matrizOriginal) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Matriz Original: \n");
+		for(int i=0;i<matrizOriginal.length;i++){
+			for(int j=0;j<matrizOriginal[0].length;j++){
+				buffer.append(matrizOriginal[i][j]+"\t");
 			}
 			buffer.append("\n");
 		}
@@ -592,6 +756,4 @@ public class GestorMetodos {
 		}
 		return salida;
 	}
-
 }
-

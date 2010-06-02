@@ -131,13 +131,37 @@ public class GestorAyuda {
 			case Constantes.INTEGRACION:
 				ruta+="Integracion.txt";
 				break;
-			case Constantes.ECUACIONESDIFERENCIALES:
-				ruta+="EcuacionesDiferenciales.txt";
-				break;
 			case Constantes.GRAFICADOR:
 				ruta+="Graficador.txt";
 				break;
-			
+			case Constantes.SPLINES:
+				ruta+="Splines.txt";
+				break;
+			case Constantes.NEWTONDIFERENCIASDIVIDIDAS:
+				ruta+="newtondifdivididas.txt";
+				break;
+			case Constantes.LAGRANGE:
+				ruta+="lagrange.txt";
+				break;
+			case Constantes.NEVILLE:
+				ruta+="neville.txt";
+				break;
+			case Constantes.DIFERENCIACION2PUNTOS:
+				ruta+="diferenciacion2puntos.txt";
+				break;
+			case Constantes.DIFERENCIACION3PUNTOS:
+				ruta+="diferenciacion3puntos.txt";
+				break;
+			case Constantes.DIFERENCIACION5PUNTOS:
+				ruta+="diferenciacion5puntos.txt";
+				break;
+			case Constantes.SIMPSON:
+				ruta+="simpson.txt";
+				break;
+			case Constantes.TRAPECIO:
+				ruta+="trapecio.txt";
+				break;
+
 		}
 		return readFile(ruta);
 	}

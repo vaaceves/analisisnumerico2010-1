@@ -29,21 +29,45 @@ public final class Constantes {
 	public static final int JACOBI=18;
 	public static final int RELAJACION=19;
 	public static final int MATRIZBANDA=20;
-	public static final int INFOGENERAL=21;
 	public static final int ECUACIONESNOLINEALES=22;
 	public static final int SISTEMASDEECUACIONES=23;
 	public static final int INTERPOLACION=24;
 	public static final int DIFERENCIACION=25;
 	public static final int INTEGRACION=26;
 	public static final int ECUACIONESDIFERENCIALES=27;
-	public static final int GRAFICADOR=28;
-	
-	
-	
-	
-	
+	public static final int LAGRANGE=28;
+	public static final int NEWTONDIFERENCIASDIVIDIDAS=29;
+	public static final int NEVILLE=30;
+	public static final int DIFERENCIACION2PTOSREGRESIVA=31;
+	public static final int DIFERENCIACION2PTOSPROGRESIVA=32;
+	public static final int DIFERENCIACION3PTOSREGRESIVA=33;
+	public static final int DIFERENCIACION3PTOSPROGRESIVA=34;
+	public static final int DIFERENCIACION3PTOSCENTRADA=35;
+	public static final int DIFERENCIACION5PTOSREGRESIVA=36;
+	public static final int DIFERENCIACION5PTOSPROGRESIVA=37;
+	public static final int DIFERENCIACION5PTOSCENTRADA=38;
+	public static final int TRAPECIOSENCILLO=39;
+	public static final int TRAPECIOGENERALIZADO=40;
+	public static final int SIMPSONUNTERCIO=41;
+	public static final int SIMPSONTRESOCTAVOS=42;
+	public static final int SIMPSONUNTERCIOGENERALIZADO=43;
+	public static final int SPLINESCUADRATICOS=44;
+	public static final int SPLINESCUBICOS=45;
 	//CONSTANTES DE MODO DE OPERACION
 	public static final int MODOCONSOLA=1;
 	public static final int MODOGRAFICOINTERFAZ1=2;
 	public static final int MODOGRAFICOINTERFAZ2=3;
+
+	//Constantes de ayuda
+	public static final int SPLINES=46;
+	public static final int INFOGENERAL=21;
+	public static final int DIFERENCIACION2PUNTOS=47;
+	public static final int DIFERENCIACION3PUNTOS=48;
+	public static final int DIFERENCIACION5PUNTOS=49;
+	public static final int TRAPECIO=50;
+	public static final int SIMPSON=51;
+	
+	//Otras Constantes
+	public static final int GRAFICADOR=100;
+	public static final String RUTAIMAGEN = "/co/edu/eafit/analisisnumerico/GUI/logo2.JPG";
 }
